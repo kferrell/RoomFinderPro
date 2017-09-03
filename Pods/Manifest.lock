@@ -1,8 +1,12 @@
 PODS:
   - Eureka (3.0.0)
+  - GPUImage (0.1.7)
+  - SwiftOCR (1.0):
+    - GPUImage
 
 DEPENDENCIES:
   - Eureka (from `https://github.com/xmartlabs/Eureka.git`, branch `feature/Xcode9-Swift3_2`)
+  - SwiftOCR
 
 EXTERNAL SOURCES:
   Eureka:
@@ -16,7 +20,9 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Eureka: 5b9418d7bfdc21ca977d69d124a6409f3e9af2c7
+  GPUImage: 733a5f0fab92df9de1c37ba9df520a833ccb406d
+  SwiftOCR: c0965eee5761acf3c780ba2c90020dc1c59de7a1
 
-PODFILE CHECKSUM: c906b9c6fb58a8b108b3a80284516dbc0a584eba
+PODFILE CHECKSUM: 27de068be2dc85dbbc249045d47c1319b4469703
 
 COCOAPODS: 1.2.1

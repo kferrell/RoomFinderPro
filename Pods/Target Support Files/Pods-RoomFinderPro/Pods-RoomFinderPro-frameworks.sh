@@ -90,9 +90,13 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Eureka/Eureka.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/GPUImage/GPUImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftOCR/SwiftOCR.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/Eureka/Eureka.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/GPUImage/GPUImage.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftOCR/SwiftOCR.framework"
 fi
 if [ "${COCOAPODS_PARALLEL_CODE_SIGN}" == "true" ]; then
   wait
