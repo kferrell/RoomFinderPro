@@ -1,0 +1,22 @@
+PODS:
+  - Eureka (3.0.0)
+
+DEPENDENCIES:
+  - Eureka (from `https://github.com/xmartlabs/Eureka.git`, branch `feature/Xcode9-Swift3_2`)
+
+EXTERNAL SOURCES:
+  Eureka:
+    :branch: feature/Xcode9-Swift3_2
+    :git: https://github.com/xmartlabs/Eureka.git
+
+CHECKOUT OPTIONS:
+  Eureka:
+    :commit: 170433bedb6db4228da60eb6c866156b6b29e666
+    :git: https://github.com/xmartlabs/Eureka.git
+
+SPEC CHECKSUMS:
+  Eureka: 5b9418d7bfdc21ca977d69d124a6409f3e9af2c7
+
+PODFILE CHECKSUM: c906b9c6fb58a8b108b3a80284516dbc0a584eba
+
+COCOAPODS: 1.2.1

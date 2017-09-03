@@ -27,7 +27,7 @@
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f95-XH-5Jk">
-                                            <rect key="frame" x="8" y="8" width="259" height="21"/>
+                                            <rect key="frame" x="8" y="13" width="259" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="iX9-9g-v7p"/>
                                             </constraints>
@@ -36,7 +36,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ua2-eH-Oao">
-                                            <rect key="frame" x="297" y="8" width="70" height="21"/>
+                                            <rect key="frame" x="297" y="13" width="70" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="70" id="2hk-TV-frf"/>
                                                 <constraint firstAttribute="height" constant="21" id="SJK-sR-XaY"/>
@@ -46,7 +46,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Building" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cgP-kn-rZM">
-                                            <rect key="frame" x="237" y="34" width="130" height="21"/>
+                                            <rect key="frame" x="237" y="39" width="130" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="width" constant="130" id="71R-Bc-fO8"/>
                                                 <constraint firstAttribute="height" constant="21" id="Ldf-qQ-7LM"/>
@@ -56,7 +56,7 @@
                                             <nil key="highlightedColor"/>
                                         </label>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Time" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Wha-up-znh">
-                                            <rect key="frame" x="8" y="34" width="179" height="21"/>
+                                            <rect key="frame" x="8" y="39" width="179" height="21"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="21" id="3C9-Ws-1VD"/>
                                             </constraints>
@@ -66,11 +66,11 @@
                                         </label>
                                     </subviews>
                                     <constraints>
-                                        <constraint firstItem="Ua2-eH-Oao" firstAttribute="top" secondItem="sIl-wM-4i1" secondAttribute="topMargin" id="2AZ-5v-nMk"/>
+                                        <constraint firstItem="Ua2-eH-Oao" firstAttribute="top" secondItem="sIl-wM-4i1" secondAttribute="topMargin" constant="5" id="2AZ-5v-nMk"/>
                                         <constraint firstItem="cgP-kn-rZM" firstAttribute="leading" secondItem="Wha-up-znh" secondAttribute="trailing" constant="50" id="4j3-ms-yxP"/>
                                         <constraint firstItem="Wha-up-znh" firstAttribute="top" secondItem="f95-XH-5Jk" secondAttribute="bottom" constant="5" id="80M-5C-L4b"/>
                                         <constraint firstItem="Wha-up-znh" firstAttribute="leading" secondItem="sIl-wM-4i1" secondAttribute="leadingMargin" id="ACF-EE-eMV"/>
-                                        <constraint firstItem="f95-XH-5Jk" firstAttribute="top" secondItem="sIl-wM-4i1" secondAttribute="topMargin" id="Jh9-yW-bqf"/>
+                                        <constraint firstItem="f95-XH-5Jk" firstAttribute="top" secondItem="sIl-wM-4i1" secondAttribute="topMargin" constant="5" id="Jh9-yW-bqf"/>
                                         <constraint firstItem="Ua2-eH-Oao" firstAttribute="leading" secondItem="f95-XH-5Jk" secondAttribute="trailing" constant="30" id="UTl-U5-VgJ"/>
                                         <constraint firstItem="cgP-kn-rZM" firstAttribute="top" secondItem="Ua2-eH-Oao" secondAttribute="bottom" constant="5" id="aDY-2E-fhk"/>
                                         <constraint firstItem="Ua2-eH-Oao" firstAttribute="trailing" secondItem="sIl-wM-4i1" secondAttribute="trailingMargin" id="c2t-jG-CDX"/>

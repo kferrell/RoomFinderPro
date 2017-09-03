@@ -19,7 +19,13 @@ class ReservationsTableViewController: UITableViewController {
         populateDummyData()
 
         // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        // self.navigationItem.rightBarButtonItem = self.editButtonItem
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddEventForm))
+    }
+    
+    @objc func showAddEventForm() {
+        let meetingForm = MeetingFormViewController(nibName: nil, bundle: nil)
+        let navController = UINavigationController(rootViewController: meetingForm)
+        present(navController, animated: true, completion: nil)
     }
     
     func populateDummyData() {
