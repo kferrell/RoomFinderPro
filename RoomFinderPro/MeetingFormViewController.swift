@@ -9,7 +9,7 @@
 import Foundation
 import Eureka
 
-class MeetingFormViewController: FormViewController {
+class MeetingFormViewController: FormViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -52,6 +52,26 @@ class MeetingFormViewController: FormViewController {
     }
     
     func takePhoto() {
+        let imagePickerController = UIImagePickerController()
+        imagePickerController.delegate = self
+        imagePickerController.modalTransitionStyle = .flipHorizontal
+        imagePickerController.allowsEditing = true
+        imagePickerController.sourceType = .camera
+        imagePickerController.allowsEditing = true
+        imagePickerController.mediaTypes = ["public.image"]
+        imagePickerController.cameraCaptureMode = .photo
+        present(imagePickerController, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage
+        self.dismiss(animated: true, completion: nil)
+        
+        // Init image analysis view
+        let storyboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
+        let photoViewController = storyboard.instantiateViewController(withIdentifier: "RoomPhotoViewController") as! RoomPhotoViewController
+        photoViewController.selectedPhoto = pickedImage
+        navigationController?.pushViewController(photoViewController, animated: true)
         
     }
 }

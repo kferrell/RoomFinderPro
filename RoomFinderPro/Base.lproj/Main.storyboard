@@ -116,5 +116,98 @@
             </objects>
             <point key="canvasLocation" x="-598" y="99"/>
         </scene>
+        <!--Room Photo View Controller-->
+        <scene sceneID="p31-th-KFf">
+            <objects>
+                <viewController restorationIdentifier="RoomPhotoViewController" storyboardIdentifier="RoomPhotoViewController" id="CCM-0Z-9Ab" customClass="RoomPhotoViewController" customModule="RoomFinderPro" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="vX9-0Z-uaq"/>
+                        <viewControllerLayoutGuide type="bottom" id="qFG-pv-nPs"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="EB2-T2-Db9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="sUZ-8c-X8h">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="450"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="450" id="a0G-gH-0O1"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Room Number:" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7MB-Kf-UIA">
+                                <rect key="frame" x="133" y="460" width="109" height="21"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="21" id="pCM-Sq-U6j"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleCallout"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="0000" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WdB-EV-cR9">
+                                <rect key="frame" x="36" y="489" width="303" height="33.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="K1I-VE-S8h">
+                                <rect key="frame" x="16" y="604" width="343" height="43"/>
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIa-PK-PNr">
+                                        <rect key="frame" x="0.0" y="0.0" width="92" height="43"/>
+                                        <state key="normal" title="Retake Photo">
+                                            <color key="titleColor" red="0.0032096477769999999" green="0.082939543850000005" blue="0.94425781249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="retakePhoto:" destination="CCM-0Z-9Ab" eventType="touchUpInside" id="mkL-qe-eZC"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QTB-la-Gz5">
+                                        <rect key="frame" x="143" y="0.0" width="79" height="43"/>
+                                        <state key="normal" title="Book Room">
+                                            <color key="titleColor" red="0.0032096477769999999" green="0.082939543850000005" blue="0.94425781249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="bookRoom:" destination="CCM-0Z-9Ab" eventType="touchUpInside" id="KGq-tq-Rqk"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uy9-As-vCJ">
+                                        <rect key="frame" x="295" y="0.0" width="48" height="43"/>
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="0.0032096477770775429" green="0.082939543849362654" blue="0.94425781249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancel:" destination="CCM-0Z-9Ab" eventType="touchUpInside" id="6VE-ZS-zcX"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="43" id="d8K-X9-MoR"/>
+                                </constraints>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="WdB-EV-cR9" firstAttribute="top" secondItem="7MB-Kf-UIA" secondAttribute="bottom" constant="8" id="CGs-aF-hec"/>
+                            <constraint firstItem="7MB-Kf-UIA" firstAttribute="top" secondItem="sUZ-8c-X8h" secondAttribute="bottom" constant="10" id="LdX-oX-UAG"/>
+                            <constraint firstItem="qFG-pv-nPs" firstAttribute="top" secondItem="K1I-VE-S8h" secondAttribute="bottom" constant="20" id="M5S-LS-IXp"/>
+                            <constraint firstItem="sUZ-8c-X8h" firstAttribute="top" secondItem="EB2-T2-Db9" secondAttribute="top" id="N4t-3t-fZT"/>
+                            <constraint firstItem="sUZ-8c-X8h" firstAttribute="leading" secondItem="EB2-T2-Db9" secondAttribute="leading" id="OUH-NF-nuM"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="WdB-EV-cR9" secondAttribute="trailing" constant="20" id="dHI-gl-p4M"/>
+                            <constraint firstItem="7MB-Kf-UIA" firstAttribute="centerX" secondItem="EB2-T2-Db9" secondAttribute="centerX" id="fcY-5s-Hho"/>
+                            <constraint firstItem="WdB-EV-cR9" firstAttribute="leading" secondItem="EB2-T2-Db9" secondAttribute="leadingMargin" constant="20" id="hHf-Hs-QHc"/>
+                            <constraint firstAttribute="trailing" secondItem="sUZ-8c-X8h" secondAttribute="trailing" id="o8B-Fn-BdK"/>
+                            <constraint firstItem="K1I-VE-S8h" firstAttribute="leading" secondItem="EB2-T2-Db9" secondAttribute="leadingMargin" id="p3p-lo-VpH"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="K1I-VE-S8h" secondAttribute="trailing" id="pEA-U4-HOr"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="photoView" destination="sUZ-8c-X8h" id="fXJ-xO-U0z"/>
+                        <outlet property="roomLabel" destination="WdB-EV-cR9" id="NEZ-8W-Jpw"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Vh7-Ak-NRe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-24.800000000000001" y="782.15892053973016"/>
+        </scene>
     </scenes>
 </document>
