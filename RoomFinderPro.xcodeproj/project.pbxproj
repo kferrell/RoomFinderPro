@@ -33,7 +33,6 @@
 /* Begin PBXFileReference section */
 		21EC42E0DF7F61C1C2EA39B9 /* Pods-RoomFinderPro.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoomFinderPro.debug.xcconfig"; path = "Pods/Target Support Files/Pods-RoomFinderPro/Pods-RoomFinderPro.debug.xcconfig"; sourceTree = "<group>"; };
 		223CEC3E1F5C9C96006F3B7D /* RoomPhotoViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomPhotoViewController.swift; sourceTree = "<group>"; };
-		223CEC491F5DF625006F3B7D /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		228125841F5B833300F5A1C2 /* RoomFinderPro.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RoomFinderPro.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		228125871F5B833300F5A1C2 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2281258C1F5B833300F5A1C2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -93,7 +92,6 @@
 		228125861F5B833300F5A1C2 /* RoomFinderPro */ = {
 			isa = PBXGroup;
 			children = (
-				223CEC491F5DF625006F3B7D /* README.md */,
 				228125871F5B833300F5A1C2 /* AppDelegate.swift */,
 				228125A71F5B837C00F5A1C2 /* ReservationsTableViewController.swift */,
 				228125AB1F5B85CA00F5A1C2 /* ReservationTableViewCell.swift */,
