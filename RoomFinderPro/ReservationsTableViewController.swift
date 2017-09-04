@@ -25,6 +25,7 @@ class ReservationsTableViewController: UITableViewController {
     @objc func showAddEventForm() {
         let meetingForm = MeetingFormViewController(nibName: nil, bundle: nil)
         let navController = UINavigationController(rootViewController: meetingForm)
+        meetingForm.parentReservationView = self
         present(navController, animated: true, completion: nil)
     }
     
@@ -36,6 +37,11 @@ class ReservationsTableViewController: UITableViewController {
         reservations.append(Reservation(title: "Standup", numberOfParticipants: 10, startDate: baseDate!, endDate: baseDate!.addingTimeInterval(30 * 60), building: "WC4", room: "3134"))
         reservations.append(Reservation(title: "Design Review", numberOfParticipants: 10, startDate: baseDate!.addingTimeInterval(60 * 60), endDate: baseDate!.addingTimeInterval(60 * 60 + 30 * 60), building: "WC4", room: "2145"))
         reservations.append(Reservation(title: "Project Planning", numberOfParticipants: 10, startDate: baseDate!.addingTimeInterval(60 * 240), endDate: baseDate!.addingTimeInterval(60 * 240 + 30 * 60), building: "WC4", room: "4800"))
+    }
+    
+    func addNewReservation(reservation: Reservation) {
+        reservations.append(reservation)
+        tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
