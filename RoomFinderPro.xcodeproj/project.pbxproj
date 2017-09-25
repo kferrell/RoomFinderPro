@@ -439,7 +439,7 @@
 			baseConfigurationReference = 21EC42E0DF7F61C1C2EA39B9 /* Pods-RoomFinderPro.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7R59WP4HLQ;
+				DEVELOPMENT_TEAM = KF56WZQHKB;
 				INFOPLIST_FILE = RoomFinderPro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kevin-ferrell.RoomFinder";
@@ -454,7 +454,7 @@
 			baseConfigurationReference = 386A870CFA23DAD1790CBD16 /* Pods-RoomFinderPro.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				DEVELOPMENT_TEAM = 7R59WP4HLQ;
+				DEVELOPMENT_TEAM = KF56WZQHKB;
 				INFOPLIST_FILE = RoomFinderPro/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.kevin-ferrell.RoomFinder";

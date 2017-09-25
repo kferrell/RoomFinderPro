@@ -35,19 +35,27 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
     }
     
     func detectAndDisplayText(forImage image: UIImage) {
+        // Remove preview text markings if needed
+        self.textImages.removeAll()
+        
+        // Create the Vision request handler
         let handler = VNImageRequestHandler(cgImage: image.cgImage!, options: [VNImageOption:Any]())
         
+        // Setup text recognition tequest
         let request = VNDetectTextRectanglesRequest(completionHandler: { (request, error) in
             if error != nil {
                 print("Error in text detection: \(String(describing: error?.localizedDescription))")
             } else {
-                self.textImages.removeAll()
-                self.markedImage = self.mixImage(topImage: self.drawRectangleForTextDectect(image: self.photoView.image!, results: request.results as! Array<VNTextObservation>), bottomImage: image)
-                self.detectRoomNumber()
-                
+                // DEBUG: Add text markings to the image on screen
+                self.markedImage = self.mixImage(topImage: self.drawRectangleForTextDectect(image: self.photoView.image!,
+                                                                                          results: request.results as! Array<VNTextObservation>),
+                                                                                      bottomImage: image)
                 DispatchQueue.main.async {
                     self.photoView.image = self.markedImage
                 }
+                
+                // Run room number detection functions
+                self.detectRoomNumber()
             }
         })
         
@@ -68,7 +76,6 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
         
         let img = renderer.image { ctx in
             for item in results {
-                //let TextObservation:VNTextObservation = item
                 ctx.cgContext.setFillColor(UIColor.clear.cgColor)
                 ctx.cgContext.setStrokeColor(UIColor.green.cgColor)
                 ctx.cgContext.setLineWidth(2)
@@ -79,6 +86,16 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
             }
         }
         return img
+    }
+    
+    func addScreenShotToTextImages(sourceImage image: UIImage, boundingBox: CGRect) {
+        // Increase the bounding box around the letters by 10% to improve OCR
+        let pct = 0.1 as CGFloat
+        let newRect = boundingBox.insetBy(dx: -boundingBox.width*pct/2, dy: -boundingBox.height*pct/2)
+        
+        let imageRef = image.cgImage!.cropping(to: newRect)
+        let croppedImage = UIImage(cgImage: imageRef!, scale: image.scale, orientation: image.imageOrientation)
+        textImages.append(croppedImage)
     }
     
     func mixImage(topImage: UIImage, bottomImage: UIImage, topImagePoint: CGPoint = CGPoint.zero, isHaveBackground: Bool = true) -> UIImage {
@@ -92,16 +109,6 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         return newImage!
-    }
-    
-    func addScreenShotToTextImages(sourceImage image: UIImage, boundingBox: CGRect) {
-        // Increase the bounding box around the letters by 10% to improve OCR
-        let pct = 0.1 as CGFloat
-        let newRect = boundingBox.insetBy(dx: -boundingBox.width*pct/2, dy: -boundingBox.height*pct/2)
-        
-        let imageRef = image.cgImage!.cropping(to: newRect)
-        let croppedImage = UIImage(cgImage: imageRef!, scale: image.scale, orientation: image.imageOrientation)
-        textImages.append(croppedImage)
     }
     
     func detectRoomNumber() {

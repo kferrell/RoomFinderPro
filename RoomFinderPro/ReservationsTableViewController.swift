@@ -34,9 +34,9 @@ class ReservationsTableViewController: UITableViewController {
         formatter.dateFormat = "yyyy/MM/dd HH:mm"
         let baseDate = formatter.date(from: "2017/09/28 09:30")
         
-        reservations.append(Reservation(title: "Standup", numberOfParticipants: 10, startDate: baseDate!, endDate: baseDate!.addingTimeInterval(30 * 60), building: "WC4", room: "3134"))
-        reservations.append(Reservation(title: "Design Review", numberOfParticipants: 10, startDate: baseDate!.addingTimeInterval(60 * 60), endDate: baseDate!.addingTimeInterval(60 * 60 + 30 * 60), building: "WC4", room: "2145"))
-        reservations.append(Reservation(title: "Project Planning", numberOfParticipants: 10, startDate: baseDate!.addingTimeInterval(60 * 240), endDate: baseDate!.addingTimeInterval(60 * 240 + 30 * 60), building: "WC4", room: "4800"))
+        reservations.append(Reservation(title: "Standup", numberOfParticipants: 10, startDate: baseDate!, endDate: baseDate!.addingTimeInterval(30 * 60), building: "West Creek 2", room: "3134"))
+        reservations.append(Reservation(title: "Design Review", numberOfParticipants: 10, startDate: baseDate!.addingTimeInterval(60 * 60), endDate: baseDate!.addingTimeInterval(60 * 60 + 30 * 60), building: "West Creek 4", room: "2145"))
+        reservations.append(Reservation(title: "Project Planning", numberOfParticipants: 10, startDate: baseDate!.addingTimeInterval(60 * 240), endDate: baseDate!.addingTimeInterval(60 * 240 + 30 * 60), building: "West Creek 8", room: "4800"))
     }
     
     func addNewReservation(reservation: Reservation) {

@@ -72,18 +72,18 @@ class MeetingFormViewController: FormViewController, UINavigationControllerDeleg
         imagePickerController.delegate = self
         imagePickerController.modalTransitionStyle = .flipHorizontal
         imagePickerController.allowsEditing = true
-        imagePickerController.sourceType = .camera
-        imagePickerController.allowsEditing = true
-        imagePickerController.mediaTypes = ["public.image"]
-        imagePickerController.cameraCaptureMode = .photo
+        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        //imagePickerController.cameraCaptureMode = .photo
         present(imagePickerController, animated: true, completion: nil)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        // Get a reference to the image taken by the user
         let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage
         self.dismiss(animated: true, completion: nil)
         
-        // Init image analysis view
+        // Initialize the image analyizer view and pass in the user's photo
         let storyboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
         let photoViewController = storyboard.instantiateViewController(withIdentifier: "RoomPhotoViewController") as! RoomPhotoViewController
         photoViewController.selectedPhoto = pickedImage
@@ -113,7 +113,7 @@ class MeetingFormViewController: FormViewController, UINavigationControllerDeleg
         let building = buildingRow?.baseValue as? String
         let room = roomRow?.value
         
-        if let title = title, let participants = participants, let start = start, let end = end, let building = building, let room = room, let reservationView = parentReservationView {
+        if let title = title, let participants = participants, let start = start, let end = end, let building = building, let room = room {
             let newMeeting = Reservation(title: title, numberOfParticipants: participants, startDate: start, endDate: end, building: building, room: room)
             parentReservationView?.addNewReservation(reservation: newMeeting)
             dismiss(animated: true, completion: nil)
