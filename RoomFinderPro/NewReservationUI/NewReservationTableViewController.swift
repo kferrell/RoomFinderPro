@@ -45,14 +45,17 @@ enum Row: Int {
 
 class NewReservationTableViewController: UITableViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
+    @IBOutlet weak var meetingTitleLabel: UITextField!
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var startDatePicker: UIDatePicker!
     @IBOutlet weak var durationLabel: UILabel!
     @IBOutlet weak var durationStepper: UIStepper!
     @IBOutlet weak var roomNumberLabel: UILabel!
+    @IBOutlet weak var saveButton: UIBarButtonItem!
     
     var startDatePickerIsHidden = true
     let reservationsInteractor = ReservationsInteractor()
+    var selectedRoom: ConferenceRoom?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,8 +63,14 @@ class NewReservationTableViewController: UITableViewController, UINavigationCont
         // Set the start date to the nearest 30 min block
         startDatePicker.date = reservationsInteractor.getNearest30Min(startDate: Date())
         setLabel(startDateLabel, date: startDatePicker.date)
+        
+        validateForm()
     }
-
+    
+    @IBAction func meetingTitleEdited(_ sender: Any) {
+        validateForm()
+    }
+    
     @IBAction func startDateDidChange(_ sender: Any) {
         setLabel(startDateLabel, date: startDatePicker.date)
     }
@@ -83,6 +92,70 @@ class NewReservationTableViewController: UITableViewController, UINavigationCont
         tableView.beginUpdates()
         tableView.endUpdates()
     }
+    
+    func setRoomNumber(toValue roomNumber: String) {
+        roomNumberLabel.text = roomNumber
+    }
+    
+    @IBAction func cancelForm(_ sender: Any) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func saveForm(_ sender: Any) {
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "FindAvailableRooms" {
+            if let destination = segue.destination as? AvailableRoomsTableViewController {
+                destination.parentReservationController = self
+                destination.startDate = startDatePicker.date
+                destination.duration = durationStepper.value
+            }
+        }
+    }
+    
+    func setSelectedRoom(room: ConferenceRoom) {
+        selectedRoom = room
+        roomNumberLabel.text = room.roomName
+        validateForm()
+    }
+    
+    func validateForm() {
+        guard let meetingTitle = meetingTitleLabel.text else {
+            saveButton.isEnabled = false
+            return
+        }
+        
+        if !meetingTitle.isEmpty && selectedRoom != nil {
+            saveButton.isEnabled = true
+        } else {
+            saveButton.isEnabled = false
+        }
+    }
+    
+    // MARK: UITableviewDelegate
+    
+    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let row = Row(indexPath: indexPath)
+        
+        if startDatePickerIsHidden && row == .StartDatePicker {
+            return 0
+        } else {
+            return super.tableView(tableView, heightForRowAt: indexPath)
+        }
+    }
+    
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let row = Row(indexPath: indexPath)
+        
+        if row == .StartDate {
+            toggleStartDatePicker()
+        }
+        
+        tableView.deselectRow(at: indexPath, animated: true)
+    }
+    
+    // MARK: UIImagePickerController Delegate
     
     @IBAction func takePhoto(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
@@ -107,38 +180,4 @@ class NewReservationTableViewController: UITableViewController, UINavigationCont
         photoViewController.parentRoomReservationController = self
         navigationController?.pushViewController(photoViewController, animated: true)
     }
-    
-    func setRoomNumber(toValue roomNumber: String) {
-        roomNumberLabel.text = roomNumber
-    }
-    
-    @IBAction func cancelForm(_ sender: Any) {
-        dismiss(animated: true, completion: nil)
-    }
-    
-    @IBAction func saveForm(_ sender: Any) {
-    }
-    
-    // MARK: UITableviewDelegate
-    
-    override func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let row = Row(indexPath: indexPath)
-        
-        if startDatePickerIsHidden && row == .StartDatePicker {
-            return 0
-        } else {
-            return super.tableView(tableView, heightForRowAt: indexPath)
-        }
-    }
-    
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let row = Row(indexPath: indexPath)
-        
-        if row == .StartDate {
-            toggleStartDatePicker()
-        }
-        
-        tableView.deselectRow(at: indexPath, animated: true)
-    }
-
 }

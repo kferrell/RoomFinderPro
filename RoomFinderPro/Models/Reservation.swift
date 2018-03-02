@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Reservation {
+struct Reservation {
     var title: String
     var numberOfParticipants: Int
     var startDate: Date

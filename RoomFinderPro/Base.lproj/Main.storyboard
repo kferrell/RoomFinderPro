@@ -127,6 +127,10 @@
                                                     <nil key="textColor"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <textInputTraits key="textInputTraits"/>
+                                                    <connections>
+                                                        <action selector="meetingTitleEdited:" destination="5Qi-iW-ZR3" eventType="editingChanged" id="HPR-29-3Ci"/>
+                                                        <action selector="meetingTitleEdited:" destination="5Qi-iW-ZR3" eventType="editingDidEnd" id="ZdU-GU-zSo"/>
+                                                    </connections>
                                                 </textField>
                                             </subviews>
                                             <constraints>
@@ -244,7 +248,7 @@
                                             </subviews>
                                         </tableViewCellContentView>
                                         <connections>
-                                            <segue destination="Y9y-mz-aKG" kind="show" id="G6X-Cy-sRH"/>
+                                            <segue destination="Y9y-mz-aKG" kind="show" identifier="FindAvailableRooms" id="G6X-Cy-sRH"/>
                                         </connections>
                                     </tableViewCell>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="Znt-da-uAk">
@@ -297,7 +301,9 @@
                     <connections>
                         <outlet property="durationLabel" destination="2zx-T2-uL5" id="AFr-zV-Vn0"/>
                         <outlet property="durationStepper" destination="ZWk-Wl-Idy" id="GDO-dR-bxa"/>
+                        <outlet property="meetingTitleLabel" destination="6Ou-bk-lOU" id="6AG-N8-ltU"/>
                         <outlet property="roomNumberLabel" destination="IaH-7f-Pf2" id="3GU-RO-Zas"/>
+                        <outlet property="saveButton" destination="j0l-FW-bMJ" id="kqF-z0-mag"/>
                         <outlet property="startDateLabel" destination="DrE-pn-o1w" id="Uke-Sk-uVe"/>
                         <outlet property="startDatePicker" destination="9W3-sh-fLe" id="c3N-Qb-rtq"/>
                     </connections>
@@ -309,13 +315,13 @@
         <!--Available Rooms-->
         <scene sceneID="r28-fo-M1b">
             <objects>
-                <tableViewController title="Available Rooms" id="Y9y-mz-aKG" sceneMemberID="viewController">
+                <tableViewController title="Available Rooms" id="Y9y-mz-aKG" customClass="AvailableRoomsTableViewController" customModule="RoomFinderPro" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ezC-yU-g3u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="RoomCell" textLabel="7po-b7-LOT" style="IBUITableViewCellStyleDefault" id="9fY-CH-hf7">
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" preservesSuperviewLayoutMargins="YES" selectionStyle="default" indentationWidth="10" reuseIdentifier="AvailableRoomCell" textLabel="7po-b7-LOT" style="IBUITableViewCellStyleDefault" id="9fY-CH-hf7">
                                 <rect key="frame" x="0.0" y="28" width="375" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" preservesSuperviewLayoutMargins="YES" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="9fY-CH-hf7" id="MC3-8j-xRM">
