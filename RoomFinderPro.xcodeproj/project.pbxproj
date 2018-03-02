@@ -22,6 +22,8 @@
 		B19A29652049E7C80065F14D /* ReservationsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A29642049E7C80065F14D /* ReservationsDataStore.swift */; };
 		B19A29672049E8360065F14D /* ConferenceRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A29662049E8360065F14D /* ConferenceRoom.swift */; };
 		B19A29692049F3F70065F14D /* AvailableRoomsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A29682049F3F70065F14D /* AvailableRoomsTableViewController.swift */; };
+		B19A296B204A05220065F14D /* RoomReservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A296A204A05220065F14D /* RoomReservation.swift */; };
+		B19A296F204A10130065F14D /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A296E204A10130065F14D /* BaseTableViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		B19A29642049E7C80065F14D /* ReservationsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsDataStore.swift; sourceTree = "<group>"; };
 		B19A29662049E8360065F14D /* ConferenceRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceRoom.swift; sourceTree = "<group>"; };
 		B19A29682049F3F70065F14D /* AvailableRoomsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableRoomsTableViewController.swift; sourceTree = "<group>"; };
+		B19A296A204A05220065F14D /* RoomReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomReservation.swift; sourceTree = "<group>"; };
+		B19A296E204A10130065F14D /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -144,6 +148,7 @@
 			children = (
 				228125A91F5B841000F5A1C2 /* Reservation.swift */,
 				B19A29662049E8360065F14D /* ConferenceRoom.swift */,
+				B19A296A204A05220065F14D /* RoomReservation.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -172,6 +177,7 @@
 			children = (
 				B19A296220498E730065F14D /* ReservationsInteractor.swift */,
 				B19A29642049E7C80065F14D /* ReservationsDataStore.swift */,
+				B19A296E204A10130065F14D /* BaseTableViewController.swift */,
 			);
 			path = Shared;
 			sourceTree = "<group>";
@@ -341,6 +347,8 @@
 				B19A29652049E7C80065F14D /* ReservationsDataStore.swift in Sources */,
 				B19A296320498E730065F14D /* ReservationsInteractor.swift in Sources */,
 				B19A29692049F3F70065F14D /* AvailableRoomsTableViewController.swift in Sources */,
+				B19A296B204A05220065F14D /* RoomReservation.swift in Sources */,
+				B19A296F204A10130065F14D /* BaseTableViewController.swift in Sources */,
 				B19A29672049E8360065F14D /* ConferenceRoom.swift in Sources */,
 				228125881F5B833300F5A1C2 /* AppDelegate.swift in Sources */,
 				B10682672048F14D00C8CBD6 /* NewReservationTableViewController.swift in Sources */,

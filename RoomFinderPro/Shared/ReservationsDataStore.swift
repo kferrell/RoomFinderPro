@@ -10,12 +10,15 @@ import Foundation
 
 enum ParseAPI: String {
     
-    case AvailableRooms
+    case getAvailableRooms
+    case saveRoomReservation
     
     func urlString() -> String {
         switch self {
-        case .AvailableRooms:
+        case .getAvailableRooms:
             return "https://parseapi.back4app.com/classes/AvailableRooms"
+        case .saveRoomReservation:
+            return "https://parseapi.back4app.com/classes/RoomReservation"
         }
     }
     
@@ -23,8 +26,8 @@ enum ParseAPI: String {
         var request = URLRequest(url: URL(string: urlString())!)
         
         // Add default request headers
-        request.addValue("dVKA56dLYAgu3vp2zPc5U0sMWDhsSSA3ImJxuNGF", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("hJtWNgzI9f2KXzLLdA5EGLZGO5goIU4vwhGbys3M", forHTTPHeaderField: "X-Parse-Master-Key")
+        request.addValue("", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("", forHTTPHeaderField: "X-Parse-Master-Key")
         
         return request
     }
@@ -41,7 +44,7 @@ class ReservationsDataStore {
         // Note: Add start date and duration filtering in actual API implementation here:
         // ###############################################################################
         
-        URLSession.shared.dataTask(with: ParseAPI.AvailableRooms.request()) { (data, response, error) in
+        URLSession.shared.dataTask(with: ParseAPI.getAvailableRooms.request()) { (data, response, error) in
             if error != nil {
                 apiResponse(nil, error)
                 return
@@ -58,6 +61,30 @@ class ReservationsDataStore {
             } catch let jsonError {
                 apiResponse(nil, jsonError)
             }
+        }.resume()
+    }
+    
+    func saveNewReservation(reservation: RoomReservation, apiResponse: @escaping (_ error: Error?) -> ()) {
+        var request = ParseAPI.saveRoomReservation.request()
+        request.httpMethod = "POST"
+        request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
+        
+        let encoder = JSONEncoder()
+        do {
+            let reservationJSON = try encoder.encode(reservation)
+            request.httpBody = reservationJSON
+        } catch {
+            apiResponse(error)
+        }
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                apiResponse(error)
+                return
+            }
+            
+            // Post was successful
+            apiResponse(nil)
         }.resume()
     }
 }

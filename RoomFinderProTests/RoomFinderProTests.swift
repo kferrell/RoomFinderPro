@@ -51,7 +51,7 @@ class RoomFinderProTests: XCTestCase {
         XCTAssert(adjustedUpMidDate.compare(expectedUpMidDate) == .orderedSame, "Date did not round properly")
     }
     
-    func testGetAvailableRooms() {
+    func testGetAvailableRoomsAPI() {
         let exp = expectation(description: "Test should return rooms")
         
         let datastore = ReservationsDataStore()
@@ -61,6 +61,23 @@ class RoomFinderProTests: XCTestCase {
         })
         
         waitForExpectations(timeout: 10) { error in
+            if let error = error {
+                XCTFail("wait for API failed: \(error)")
+            }
+        }
+    }
+    
+    func testRoomReservationAPI() {
+        let exp = expectation(description: "Test should return rooms")
+        
+        let datastore = ReservationsDataStore()
+        let reservation = RoomReservation(reservationId: 1, title: "Test Reservation", startDateString: "1234", duration: 30, roomName: "WP 1200A")
+        datastore.saveNewReservation(reservation: reservation, apiResponse: { error in
+            XCTAssert(error == nil, "Received error: \(String(describing: error))")
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 100) { error in
             if let error = error {
                 XCTFail("wait for API failed: \(error)")
             }

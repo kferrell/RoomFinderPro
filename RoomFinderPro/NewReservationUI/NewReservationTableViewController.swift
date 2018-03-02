@@ -43,7 +43,7 @@ enum Row: Int {
     }
 }
 
-class NewReservationTableViewController: UITableViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
+class NewReservationTableViewController: BaseTableViewController {
     
     @IBOutlet weak var meetingTitleLabel: UITextField!
     @IBOutlet weak var startDateLabel: UILabel!
@@ -55,6 +55,7 @@ class NewReservationTableViewController: UITableViewController, UINavigationCont
     
     var startDatePickerIsHidden = true
     let reservationsInteractor = ReservationsInteractor()
+    let reservationsDataStore = ReservationsDataStore()
     var selectedRoom: ConferenceRoom?
     
     override func viewDidLoad() {
@@ -102,6 +103,25 @@ class NewReservationTableViewController: UITableViewController, UINavigationCont
     }
     
     @IBAction func saveForm(_ sender: Any) {
+        guard let meetingTitle = meetingTitleLabel.text, let selectedRoom = selectedRoom else { return }
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        let reservation = RoomReservation(objectId: nil, title: meetingTitle, startDateString: dateFormatter.string(from: startDatePicker.date), duration: Int(durationStepper.value), roomName: selectedRoom.roomName)
+        
+        showActivityIndicator()
+        reservationsDataStore.saveNewReservation(reservation: reservation, apiResponse: { [weak self] error in
+            DispatchQueue.main.async {
+                self?.hideActivityIndicator()
+                if error == nil {
+                    self?.dismiss(animated: true, completion: nil)
+                } else {
+                    let alert = UIAlertController(title: "Error", message: "RoomFinderPro was unable to make your reservation at this time. Please try again later.", preferredStyle: .alert)
+                    alert.addAction(UIAlertAction(title: "Ok", style: .default, handler: nil))
+                    self?.present(alert, animated: true, completion: nil)
+                }
+            }
+        })
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -154,8 +174,9 @@ class NewReservationTableViewController: UITableViewController, UINavigationCont
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-    
-    // MARK: UIImagePickerController Delegate
+}
+
+extension NewReservationTableViewController : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBAction func takePhoto(_ sender: Any) {
         let imagePickerController = UIImagePickerController()
