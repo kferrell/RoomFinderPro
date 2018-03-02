@@ -12,8 +12,7 @@ enum Row: Int {
     case Title
     case StartDate
     case StartDatePicker
-    case EndDate
-    case EndDatePicker
+    case Duration
     case RoomNumber
     case PhotoButton
     case Unknown
@@ -29,9 +28,7 @@ enum Row: Int {
         case (0, 2):
             row = Row.StartDatePicker
         case (0, 3):
-            row = Row.EndDate
-        case (0, 4):
-            row = Row.EndDatePicker
+            row = Row.Duration
         case (1, 0):
             row = Row.RoomNumber
         case (1, 1):
@@ -50,40 +47,38 @@ class NewReservationTableViewController: UITableViewController, UINavigationCont
     
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var startDatePicker: UIDatePicker!
-    @IBOutlet weak var endDateLabel: UILabel!
-    @IBOutlet weak var endDatePicker: UIDatePicker!
+    @IBOutlet weak var durationLabel: UILabel!
+    @IBOutlet weak var durationStepper: UIStepper!
     @IBOutlet weak var roomNumberLabel: UILabel!
     
     var startDatePickerIsHidden = true
-    var endDatePickerIsHidden = true
+    let reservationsInteractor = ReservationsInteractor()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        // Set the start date to the nearest 30 min block
+        startDatePicker.date = reservationsInteractor.getNearest30Min(startDate: Date())
+        setLabel(startDateLabel, date: startDatePicker.date)
     }
 
     @IBAction func startDateDidChange(_ sender: Any) {
         setLabel(startDateLabel, date: startDatePicker.date)
     }
     
-    @IBAction func endDateDidChange(_ sender: Any) {
-        setLabel(endDateLabel, date: endDatePicker.date)
+    @IBAction func durationStepperDidChange(_ sender: Any) {
+        let labelValue = reservationsInteractor.getLabelText(forMinDuration: durationStepper.value)
+        durationLabel.text = "Duration: \(labelValue)"
     }
     
     func setLabel(_ label: UILabel, date: Date) {
         let formatter = DateFormatter()
-        formatter.dateFormat = "yy-MM-dd HH:mm"
+        formatter.dateFormat = "MMM d, h:mm a"
         label.text = formatter.string(from: date)
     }
     
     func toggleStartDatePicker() {
         startDatePickerIsHidden = !startDatePickerIsHidden
-        
-        tableView.beginUpdates()
-        tableView.endUpdates()
-    }
-    
-    func toggleEndDatePicker() {
-        endDatePickerIsHidden = !endDatePickerIsHidden
         
         tableView.beginUpdates()
         tableView.endUpdates()
@@ -131,8 +126,6 @@ class NewReservationTableViewController: UITableViewController, UINavigationCont
         
         if startDatePickerIsHidden && row == .StartDatePicker {
             return 0
-        } else if endDatePickerIsHidden && row == .EndDatePicker {
-            return 0
         } else {
             return super.tableView(tableView, heightForRowAt: indexPath)
         }
@@ -143,8 +136,6 @@ class NewReservationTableViewController: UITableViewController, UINavigationCont
         
         if row == .StartDate {
             toggleStartDatePicker()
-        } else if row == .EndDate {
-            toggleEndDatePicker()
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
