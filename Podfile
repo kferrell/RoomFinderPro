@@ -5,7 +5,6 @@ use_frameworks!
 
 target 'RoomFinderPro' do
 
-pod 'Eureka', :git => 'https://github.com/xmartlabs/Eureka.git', :branch => 'feature/Xcode9-Swift3_2'
 pod 'SwiftOCR'
 
 end

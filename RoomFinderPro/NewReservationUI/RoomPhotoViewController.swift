@@ -12,7 +12,7 @@ import SwiftOCR
 
 class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
-    var parentRoomReservationController: MeetingFormViewController?
+    var parentRoomReservationController: NewReservationTableViewController?
     
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var roomLabel: UILabel!

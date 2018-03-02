@@ -15,18 +15,8 @@ class ReservationsTableViewController: UITableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Meetings"
+        navigationItem.title = "Room Reservations"
         populateDummyData()
-
-        // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(showAddEventForm))
-    }
-    
-    @objc func showAddEventForm() {
-        let meetingForm = MeetingFormViewController(nibName: nil, bundle: nil)
-        let navController = UINavigationController(rootViewController: meetingForm)
-        meetingForm.parentReservationView = self
-        present(navController, animated: true, completion: nil)
     }
     
     func populateDummyData() {
