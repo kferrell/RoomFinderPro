@@ -13,11 +13,19 @@ class ReservationsTableViewController: BaseTableViewController {
     let reservationsDataStore = ReservationsDataStore()
     var reservations = [RoomReservation]()
     
+    var loadingIndicator: UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setup non-blocking loading indicator for main screen
+        setupLoadingIndicator()
+        
         // Load locally cached reservations during initial load
         loadDataFromLocalCache()
+        
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(loadDataFromAPI), for: .valueChanged)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -32,7 +40,7 @@ class ReservationsTableViewController: BaseTableViewController {
         self.tableView.reloadData()
     }
     
-    func loadDataFromAPI() {
+    @objc func loadDataFromAPI() {
         showActivityIndicator()
         reservationsDataStore.getRoomReservations(apiResponse: { [weak self] results, error in
             if let results = results {
@@ -47,6 +55,7 @@ class ReservationsTableViewController: BaseTableViewController {
                 DispatchQueue.main.async {
                     self?.tableView.reloadData()
                     self?.hideActivityIndicator()
+                    self?.refreshControl?.endRefreshing()
                     
                     // Cache results locally for next cold start
                     self?.reservationsDataStore.saveRoomReservationToLocalCache(reservations: sortedReservations)
@@ -96,5 +105,42 @@ class ReservationsTableViewController: BaseTableViewController {
         }
         
         return [delete]
+    }
+    
+    // MARK: Non-blocking loading indicator implementation
+    
+    func setupLoadingIndicator() {
+        let screenSize = UIScreen.main.bounds
+        let labelWidth = 215.0
+        let labelStartX = (Double(screenSize.width) / 2.0) - (labelWidth / 2.0)
+        loadingIndicator = UILabel(frame: CGRect(x: labelStartX, y: Double(screenSize.height) + 50.0, width: labelWidth, height: 20.0))
+        loadingIndicator?.font = UIFont.systemFont(ofSize: 12.0, weight: UIFont.Weight.semibold)
+        loadingIndicator?.text = "Checking for new reservations..."
+        loadingIndicator?.textAlignment = .center
+        loadingIndicator?.backgroundColor = UIColor.lightGray
+        loadingIndicator?.layer.cornerRadius = 5.0
+        loadingIndicator?.layer.masksToBounds = true
+        view.addSubview(loadingIndicator!)
+    }
+    
+    override func showActivityIndicator() {
+        guard let loadingIndicator = loadingIndicator else { return }
+
+        loadingIndicator.isHidden = false
+        UIView.animate(withDuration: 1.0, animations: {
+            var newFrame = loadingIndicator.frame
+            newFrame.origin.y = newFrame.origin.y - 250.0
+            loadingIndicator.frame = newFrame
+        })
+    }
+
+    override func hideActivityIndicator() {
+        guard let loadingIndicator = loadingIndicator else { return }
+
+        UIView.animate(withDuration: 0.3, animations: {
+            var newFrame = loadingIndicator.frame
+            newFrame.origin.y = newFrame.origin.y + 250.0
+            loadingIndicator.frame = newFrame
+        }, completion: nil)
     }
 }
