@@ -14,10 +14,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
 
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
         return true
+    }
+    
+    func application(_ application: UIApplication, performActionFor shortcutItem: UIApplicationShortcutItem, completionHandler: @escaping (Bool) -> Void) {
+        if shortcutItem.type == "com.kevin-ferrell.RoomFinder.NewReservation" {
+            if let rootNavController = window?.rootViewController as? UINavigationController {
+                if let reservationsViewController = rootNavController.viewControllers.first as? ReservationsTableViewController {
+                    reservationsViewController.performSegue(withIdentifier: "NewReservationSegue", sender: self)
+                    completionHandler(true)
+                }
+            }
+        }
+        
+        completionHandler(false)
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

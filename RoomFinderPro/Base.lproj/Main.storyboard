@@ -79,7 +79,7 @@
                     <navigationItem key="navigationItem" title="Reservations" id="zs6-U1-03w">
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="Wzj-7d-7ti">
                             <connections>
-                                <segue destination="b5y-tv-8Q9" kind="presentation" id="g1r-rE-GlL"/>
+                                <segue destination="b5y-tv-8Q9" kind="presentation" identifier="NewReservationSegue" id="g1r-rE-GlL"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
