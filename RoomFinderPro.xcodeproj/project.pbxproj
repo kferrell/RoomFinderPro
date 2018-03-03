@@ -15,7 +15,6 @@
 		228125921F5B833300F5A1C2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 228125901F5B833300F5A1C2 /* LaunchScreen.storyboard */; };
 		2281259D1F5B833400F5A1C2 /* RoomFinderProTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2281259C1F5B833400F5A1C2 /* RoomFinderProTests.swift */; };
 		228125A81F5B837C00F5A1C2 /* ReservationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228125A71F5B837C00F5A1C2 /* ReservationsTableViewController.swift */; };
-		228125AA1F5B841000F5A1C2 /* Reservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228125A91F5B841000F5A1C2 /* Reservation.swift */; };
 		228125AC1F5B85CA00F5A1C2 /* ReservationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228125AB1F5B85CA00F5A1C2 /* ReservationTableViewCell.swift */; };
 		B10682672048F14D00C8CBD6 /* NewReservationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10682662048F14D00C8CBD6 /* NewReservationTableViewController.swift */; };
 		B19A296320498E730065F14D /* ReservationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A296220498E730065F14D /* ReservationsInteractor.swift */; };
@@ -24,6 +23,7 @@
 		B19A29692049F3F70065F14D /* AvailableRoomsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A29682049F3F70065F14D /* AvailableRoomsTableViewController.swift */; };
 		B19A296B204A05220065F14D /* RoomReservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A296A204A05220065F14D /* RoomReservation.swift */; };
 		B19A296F204A10130065F14D /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A296E204A10130065F14D /* BaseTableViewController.swift */; };
+		B19A2971204A2D340065F14D /* ParseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A2970204A2D340065F14D /* ParseAPI.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -49,7 +49,6 @@
 		2281259C1F5B833400F5A1C2 /* RoomFinderProTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomFinderProTests.swift; sourceTree = "<group>"; };
 		2281259E1F5B833400F5A1C2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		228125A71F5B837C00F5A1C2 /* ReservationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsTableViewController.swift; sourceTree = "<group>"; };
-		228125A91F5B841000F5A1C2 /* Reservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Reservation.swift; sourceTree = "<group>"; };
 		228125AB1F5B85CA00F5A1C2 /* ReservationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationTableViewCell.swift; sourceTree = "<group>"; };
 		386A870CFA23DAD1790CBD16 /* Pods-RoomFinderPro.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-RoomFinderPro.release.xcconfig"; path = "Pods/Target Support Files/Pods-RoomFinderPro/Pods-RoomFinderPro.release.xcconfig"; sourceTree = "<group>"; };
 		9C49FBB011A3A7AAFEAF6E67 /* Pods_RoomFinderPro.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_RoomFinderPro.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -60,6 +59,7 @@
 		B19A29682049F3F70065F14D /* AvailableRoomsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailableRoomsTableViewController.swift; sourceTree = "<group>"; };
 		B19A296A204A05220065F14D /* RoomReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomReservation.swift; sourceTree = "<group>"; };
 		B19A296E204A10130065F14D /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
+		B19A2970204A2D340065F14D /* ParseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseAPI.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,7 +146,6 @@
 		B19A295E2049015A0065F14D /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				228125A91F5B841000F5A1C2 /* Reservation.swift */,
 				B19A29662049E8360065F14D /* ConferenceRoom.swift */,
 				B19A296A204A05220065F14D /* RoomReservation.swift */,
 			);
@@ -176,6 +175,7 @@
 			isa = PBXGroup;
 			children = (
 				B19A296220498E730065F14D /* ReservationsInteractor.swift */,
+				B19A2970204A2D340065F14D /* ParseAPI.swift */,
 				B19A29642049E7C80065F14D /* ReservationsDataStore.swift */,
 				B19A296E204A10130065F14D /* BaseTableViewController.swift */,
 			);
@@ -353,7 +353,7 @@
 				228125881F5B833300F5A1C2 /* AppDelegate.swift in Sources */,
 				B10682672048F14D00C8CBD6 /* NewReservationTableViewController.swift in Sources */,
 				228125AC1F5B85CA00F5A1C2 /* ReservationTableViewCell.swift in Sources */,
-				228125AA1F5B841000F5A1C2 /* Reservation.swift in Sources */,
+				B19A2971204A2D340065F14D /* ParseAPI.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

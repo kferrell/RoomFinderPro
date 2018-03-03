@@ -8,37 +8,44 @@
 
 import UIKit
 
-class ReservationsTableViewController: UITableViewController {
+class ReservationsTableViewController: BaseTableViewController {
     
-    var reservations = [Reservation]()
+    let reservationsDataStore = ReservationsDataStore()
+    var reservations = [RoomReservation]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        navigationItem.title = "Room Reservations"
-        populateDummyData()
     }
     
-    func populateDummyData() {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy/MM/dd HH:mm"
-        let baseDate = formatter.date(from: "2017/09/28 09:30")
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
         
-        reservations.append(Reservation(title: "Standup", numberOfParticipants: 10, startDate: baseDate!, endDate: baseDate!.addingTimeInterval(30 * 60), building: "West Creek 2", room: "3134"))
-        reservations.append(Reservation(title: "Design Review", numberOfParticipants: 10, startDate: baseDate!.addingTimeInterval(60 * 60), endDate: baseDate!.addingTimeInterval(60 * 60 + 30 * 60), building: "West Creek 4", room: "2145"))
-        reservations.append(Reservation(title: "Project Planning", numberOfParticipants: 10, startDate: baseDate!.addingTimeInterval(60 * 240), endDate: baseDate!.addingTimeInterval(60 * 240 + 30 * 60), building: "West Creek 8", room: "4800"))
+        loadDataFromAPI()
     }
     
-    func addNewReservation(reservation: Reservation) {
-        reservations.append(reservation)
-        tableView.reloadData()
+    func loadDataFromAPI() {
+        showActivityIndicator()
+        reservationsDataStore.getRoomReservations(apiResponse: { [weak self] results, error in
+            if let results = results {
+                self?.reservations = results
+            }
+            
+            DispatchQueue.main.async {
+                self?.tableView.reloadData()
+                self?.hideActivityIndicator()
+            }
+        })
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    func deleteReservationFromAPI(reservation: RoomReservation) {
+        reservationsDataStore.deleteRoomReservation(reservation: reservation, apiResponse: { error in
+            if let error = error {
+                print("Unable to delete reservation: \(error)")
+            }
+        })
     }
-
+    
     // MARK: - Table view data source
 
     override func numberOfSections(in tableView: UITableView) -> Int {
@@ -51,55 +58,26 @@ class ReservationsTableViewController: UITableViewController {
 
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "ReservationCell", for: indexPath) as! ReservationTableViewCell
-
         cell.configureCell(withReservation: reservations[indexPath.row])
-
         return cell
     }
     
-    /*
-    // Override to support conditional editing of the table view.
-    override func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the specified item to be editable.
-        return true
+    override func tableView(_ tableView: UITableView, editActionsForRowAt indexPath: IndexPath) -> [UITableViewRowAction]? {
+        let delete = UITableViewRowAction(style: .destructive, title: "Delete") { (action, indexPath) in
+            let alert = UIAlertController(title: "Delete Reservation", message: "Are you sure that you wish to delete this room reservation?", preferredStyle: .alert)
+            let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
+                self.deleteReservationFromAPI(reservation: self.reservations[indexPath.row])
+                self.reservations.remove(at: indexPath.row)
+                tableView.deleteRows(at: [indexPath], with: .automatic)
+            })
+            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+            
+            alert.addAction(cancelAction)
+            alert.addAction(deleteAction)
+            
+            self.present(alert, animated: true, completion: nil)
+        }
+        
+        return [delete]
     }
-    */
-
-    /*
-    // Override to support editing the table view.
-    override func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
-        if editingStyle == .delete {
-            // Delete the row from the data source
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        } else if editingStyle == .insert {
-            // Create a new instance of the appropriate class, insert it into the array, and add a new row to the table view
-        }    
-    }
-    */
-
-    /*
-    // Override to support rearranging the table view.
-    override func tableView(_ tableView: UITableView, moveRowAt fromIndexPath: IndexPath, to: IndexPath) {
-
-    }
-    */
-
-    /*
-    // Override to support conditional rearranging of the table view.
-    override func tableView(_ tableView: UITableView, canMoveRowAt indexPath: IndexPath) -> Bool {
-        // Return false if you do not want the item to be re-orderable.
-        return true
-    }
-    */
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }

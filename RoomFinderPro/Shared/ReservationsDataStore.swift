@@ -8,29 +8,8 @@
 
 import Foundation
 
-enum ParseAPI: String {
-    
-    case getAvailableRooms
-    case saveRoomReservation
-    
-    func urlString() -> String {
-        switch self {
-        case .getAvailableRooms:
-            return "https://parseapi.back4app.com/classes/AvailableRooms"
-        case .saveRoomReservation:
-            return "https://parseapi.back4app.com/classes/RoomReservation"
-        }
-    }
-    
-    func request() -> URLRequest {
-        var request = URLRequest(url: URL(string: urlString())!)
-        
-        // Add default request headers
-        request.addValue("", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("", forHTTPHeaderField: "X-Parse-Master-Key")
-        
-        return request
-    }
+enum APIError: Error {
+    case RequestError(String)
 }
 
 class ReservationsDataStore {
@@ -84,6 +63,49 @@ class ReservationsDataStore {
             }
             
             // Post was successful
+            apiResponse(nil)
+        }.resume()
+    }
+    
+    func getRoomReservations(apiResponse: @escaping (_ results: [RoomReservation]?, _ error: Error?) -> ()) {
+        URLSession.shared.dataTask(with: ParseAPI.getRoomReservations.request()) { (data, response, error) in
+            if error != nil {
+                apiResponse(nil, error)
+                return
+            }
+            
+            guard let data = data else {
+                apiResponse([RoomReservation](), nil)
+                return
+            }
+            
+            do {
+                let resultsObject = try JSONDecoder().decode(RoomReservationResponse.self, from: data)
+                apiResponse(resultsObject.results, nil)
+            } catch let jsonError {
+                apiResponse(nil, jsonError)
+            }
+        }.resume()
+    }
+    
+    func deleteRoomReservation(reservation: RoomReservation, apiResponse: @escaping (_ error: Error?) -> ()) {
+        guard let objectId = reservation.objectId else {
+            apiResponse(APIError.RequestError("Reservation must contain an ID to be deleted"))
+            return
+        }
+        
+        let urlString = ParseAPI.deleteRoomReservation.urlString() + "/" + objectId
+        var request = ParseAPI.deleteRoomReservation.request()
+        request.url = URL(string: urlString)
+        request.httpMethod = "DELETE"
+        
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
+            if error != nil {
+                apiResponse(error)
+                return
+            }
+            
+            // Delete was successful
             apiResponse(nil)
         }.resume()
     }

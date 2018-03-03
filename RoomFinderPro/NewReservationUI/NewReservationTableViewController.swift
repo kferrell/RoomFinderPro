@@ -106,7 +106,7 @@ class NewReservationTableViewController: BaseTableViewController {
         guard let meetingTitle = meetingTitleLabel.text, let selectedRoom = selectedRoom else { return }
 
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateFormatter.dateFormat = RoomReservation.dateFormatString
         let reservation = RoomReservation(objectId: nil, title: meetingTitle, startDateString: dateFormatter.string(from: startDatePicker.date), duration: Int(durationStepper.value), roomName: selectedRoom.roomName)
         
         showActivityIndicator()

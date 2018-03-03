@@ -12,18 +12,12 @@ class ReservationTableViewCell: UITableViewCell {
     
     @IBOutlet weak var titleLabel: UILabel!
     @IBOutlet weak var roomLabel: UILabel!
-    @IBOutlet weak var buildingLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     
-    func configureCell(withReservation reservation: Reservation) {
+    func configureCell(withReservation reservation: RoomReservation) {
         titleLabel.text = reservation.title
-        roomLabel.text = reservation.room
-        buildingLabel.text = reservation.building
-        
-        let formatter = DateFormatter()
-        formatter.dateStyle = .short
-        formatter.timeStyle = .short
-        timeLabel.text = formatter.string(from: reservation.startDate)
+        roomLabel.text = reservation.roomName
+        timeLabel.text = reservation.formattedDateString()
     }
 
     override func setSelected(_ selected: Bool, animated: Bool) {

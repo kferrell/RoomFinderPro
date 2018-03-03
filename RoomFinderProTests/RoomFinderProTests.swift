@@ -71,13 +71,29 @@ class RoomFinderProTests: XCTestCase {
         let exp = expectation(description: "Test should return rooms")
         
         let datastore = ReservationsDataStore()
-        let reservation = RoomReservation(reservationId: 1, title: "Test Reservation", startDateString: "1234", duration: 30, roomName: "WP 1200A")
+        let reservation = RoomReservation(objectId: nil, title: "Test Reservation", startDateString: "1234", duration: 30, roomName: "WP 1200A")
         datastore.saveNewReservation(reservation: reservation, apiResponse: { error in
             XCTAssert(error == nil, "Received error: \(String(describing: error))")
             exp.fulfill()
         })
         
         waitForExpectations(timeout: 100) { error in
+            if let error = error {
+                XCTFail("wait for API failed: \(error)")
+            }
+        }
+    }
+    
+    func testGetRoomReservationsAPI() {
+        let exp = expectation(description: "Test should return room reservations")
+        
+        let datastore = ReservationsDataStore()
+        datastore.getRoomReservations(apiResponse: { results, error in
+            XCTAssert(results!.count > 0 , "Did not return results")
+            exp.fulfill()
+        })
+        
+        waitForExpectations(timeout: 10) { error in
             if let error = error {
                 XCTFail("wait for API failed: \(error)")
             }
