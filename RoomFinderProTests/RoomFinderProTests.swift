@@ -13,7 +13,10 @@ class RoomFinderProTests: XCTestCase {
     
     override func setUp() {
         super.setUp()
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        
+        // Clear out local reservations cache
+        let datastore = ReservationsDataStore()
+        datastore.deleteAllCachedRoomReservations()
     }
     
     override func tearDown() {
@@ -98,6 +101,26 @@ class RoomFinderProTests: XCTestCase {
                 XCTFail("wait for API failed: \(error)")
             }
         }
+    }
+    
+    func testCoreDataLocalCache() {
+        let datastore = ReservationsDataStore()
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = RoomReservation.dateFormatString
+        
+        let res_30minsPast = RoomReservation(objectId: "ABC123", title: "Room Reservation 1", startDateString: dateFormatter.string(from: Date().addingTimeInterval((-60 * 30))), duration: 30, roomName: "1200A")
+        let res_10minsPast = RoomReservation(objectId: "ABC123", title: "Room Reservation 1", startDateString: dateFormatter.string(from: Date().addingTimeInterval((-60 * 10))), duration: 30, roomName: "1200A")
+        let res_30minsFuture = RoomReservation(objectId: "ABC456", title: "Room Reservation 2", startDateString: dateFormatter.string(from: Date().addingTimeInterval((60 * 30))), duration: 30, roomName: "1200B")
+        let reservations = [res_30minsPast, res_10minsPast, res_30minsFuture]
+        
+        // Save reservations to local cache
+        datastore.saveRoomReservationToLocalCache(reservations: reservations)
+        
+        // Retreive saved reservations (should only return two: 10 mins in past and 30 mins in future)
+        let cachedReservations = datastore.getRoomReservationLocalCache()
+        
+        XCTAssert(cachedReservations.count == 2, "Reservations were not cached")
+        
     }
     
 }

@@ -24,6 +24,7 @@
 		B19A296B204A05220065F14D /* RoomReservation.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A296A204A05220065F14D /* RoomReservation.swift */; };
 		B19A296F204A10130065F14D /* BaseTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A296E204A10130065F14D /* BaseTableViewController.swift */; };
 		B19A2971204A2D340065F14D /* ParseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A2970204A2D340065F14D /* ParseAPI.swift */; };
+		B19A2974204A42470065F14D /* RoomFinderPro.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = B19A2972204A42470065F14D /* RoomFinderPro.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,6 +61,7 @@
 		B19A296A204A05220065F14D /* RoomReservation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomReservation.swift; sourceTree = "<group>"; };
 		B19A296E204A10130065F14D /* BaseTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableViewController.swift; sourceTree = "<group>"; };
 		B19A2970204A2D340065F14D /* ParseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParseAPI.swift; sourceTree = "<group>"; };
+		B19A2973204A42470065F14D /* RoomFinderPro.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RoomFinderPro.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				228125871F5B833300F5A1C2 /* AppDelegate.swift */,
+				B19A2972204A42470065F14D /* RoomFinderPro.xcdatamodeld */,
 				B19A295E2049015A0065F14D /* Models */,
 				B19A296120498E5C0065F14D /* Shared */,
 				B19A2960204901880065F14D /* ReservationsListUI */,
@@ -230,7 +233,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0900;
-				LastUpgradeCheck = 0900;
+				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Capital One";
 				TargetAttributes = {
 					228125831F5B833300F5A1C2 = {
@@ -346,6 +349,7 @@
 				228125A81F5B837C00F5A1C2 /* ReservationsTableViewController.swift in Sources */,
 				B19A29652049E7C80065F14D /* ReservationsDataStore.swift in Sources */,
 				B19A296320498E730065F14D /* ReservationsInteractor.swift in Sources */,
+				B19A2974204A42470065F14D /* RoomFinderPro.xcdatamodeld in Sources */,
 				B19A29692049F3F70065F14D /* AvailableRoomsTableViewController.swift in Sources */,
 				B19A296B204A05220065F14D /* RoomReservation.swift in Sources */,
 				B19A296F204A10130065F14D /* BaseTableViewController.swift in Sources */,
@@ -415,6 +419,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -470,6 +476,8 @@
 				CLANG_WARN_ENUM_CONVERSION = YES;
 				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
 				CLANG_WARN_STRICT_PROTOTYPES = YES;
@@ -591,6 +599,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		B19A2972204A42470065F14D /* RoomFinderPro.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				B19A2973204A42470065F14D /* RoomFinderPro.xcdatamodel */,
+			);
+			currentVersion = B19A2973204A42470065F14D /* RoomFinderPro.xcdatamodel */;
+			path = RoomFinderPro.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 2281257C1F5B833300F5A1C2 /* Project object */;
 }

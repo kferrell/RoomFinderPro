@@ -16,24 +16,41 @@ class ReservationsTableViewController: BaseTableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Load locally cached reservations during initial load
+        loadDataFromLocalCache()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
         
+        // Refresh latest data from the API
         loadDataFromAPI()
+    }
+    
+    func loadDataFromLocalCache() {
+        reservations = reservationsDataStore.getRoomReservationLocalCache()
+        self.tableView.reloadData()
     }
     
     func loadDataFromAPI() {
         showActivityIndicator()
         reservationsDataStore.getRoomReservations(apiResponse: { [weak self] results, error in
             if let results = results {
-                self?.reservations = results
-            }
-            
-            DispatchQueue.main.async {
-                self?.tableView.reloadData()
-                self?.hideActivityIndicator()
+                // Sort reservations by date
+                let sortedReservations = results.sorted(by: {
+                    guard let reservationDate0 = $0.startDate(), let reservationDate1 = $1.startDate() else { return false }
+                    return reservationDate0.compare(reservationDate1) == .orderedDescending
+                })
+                
+                self?.reservations = sortedReservations
+                
+                DispatchQueue.main.async {
+                    self?.tableView.reloadData()
+                    self?.hideActivityIndicator()
+                    
+                    // Cache results locally for next cold start
+                    self?.reservationsDataStore.saveRoomReservationToLocalCache(reservations: sortedReservations)
+                }
             }
         })
     }
@@ -68,7 +85,7 @@ class ReservationsTableViewController: BaseTableViewController {
             let deleteAction = UIAlertAction(title: "Delete", style: .destructive, handler: { _ in
                 self.deleteReservationFromAPI(reservation: self.reservations[indexPath.row])
                 self.reservations.remove(at: indexPath.row)
-                tableView.deleteRows(at: [indexPath], with: .automatic)
+                tableView.deleteRows(at: [indexPath], with: .fade)
             })
             let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
             
