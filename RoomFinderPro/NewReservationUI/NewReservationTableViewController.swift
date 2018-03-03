@@ -43,7 +43,7 @@ enum Row: Int {
     }
 }
 
-class NewReservationTableViewController: BaseTableViewController {
+class NewReservationTableViewController: BaseTableViewController, UITextFieldDelegate {
     
     @IBOutlet weak var meetingTitleLabel: UITextField!
     @IBOutlet weak var startDateLabel: UILabel!
@@ -68,6 +68,11 @@ class NewReservationTableViewController: BaseTableViewController {
         validateForm()
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        meetingTitleLabel.resignFirstResponder()
+        return true
+    }
+    
     @IBAction func meetingTitleEdited(_ sender: Any) {
         validateForm()
     }
@@ -77,6 +82,9 @@ class NewReservationTableViewController: BaseTableViewController {
     }
     
     @IBAction func durationStepperDidChange(_ sender: Any) {
+        // Hide the keyboard if displayed
+        meetingTitleLabel.resignFirstResponder()
+        
         let labelValue = reservationsInteractor.getLabelText(forMinDuration: durationStepper.value)
         durationLabel.text = "Duration: \(labelValue)"
     }
@@ -126,6 +134,9 @@ class NewReservationTableViewController: BaseTableViewController {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "FindAvailableRooms" {
+            // Hide the keyboard if displayed
+            meetingTitleLabel.resignFirstResponder()
+            
             if let destination = segue.destination as? AvailableRoomsTableViewController {
                 destination.parentReservationController = self
                 destination.startDate = startDatePicker.date
@@ -169,6 +180,9 @@ class NewReservationTableViewController: BaseTableViewController {
         let row = Row(indexPath: indexPath)
         
         if row == .StartDate {
+            // Hide the keyboard if displayed
+            meetingTitleLabel.resignFirstResponder()
+            
             toggleStartDatePicker()
         }
         
@@ -179,6 +193,9 @@ class NewReservationTableViewController: BaseTableViewController {
 extension NewReservationTableViewController : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBAction func takePhoto(_ sender: Any) {
+        // Hide the keyboard if displayed
+        meetingTitleLabel.resignFirstResponder()
+        
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
         imagePickerController.modalTransitionStyle = .flipHorizontal

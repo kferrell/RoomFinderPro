@@ -13,7 +13,7 @@
         <scene sceneID="gSb-hU-RcA">
             <objects>
                 <tableViewController title="Reservations" id="Tvy-Pa-jhA" customClass="ReservationsTableViewController" customModule="RoomFinderPro" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="YnF-iP-fN3">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="70" sectionHeaderHeight="28" sectionFooterHeight="28" id="YnF-iP-fN3">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -92,7 +92,7 @@
         <scene sceneID="gzq-p0-bjb">
             <objects>
                 <tableViewController id="5Qi-iW-ZR3" customClass="NewReservationTableViewController" customModule="RoomFinderPro" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="pSg-yF-GgC">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceVertical="YES" dataMode="static" style="grouped" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="18" sectionFooterHeight="18" id="pSg-yF-GgC">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
@@ -114,6 +114,7 @@
                                                     <connections>
                                                         <action selector="meetingTitleEdited:" destination="5Qi-iW-ZR3" eventType="editingChanged" id="HPR-29-3Ci"/>
                                                         <action selector="meetingTitleEdited:" destination="5Qi-iW-ZR3" eventType="editingDidEnd" id="ZdU-GU-zSo"/>
+                                                        <outlet property="delegate" destination="5Qi-iW-ZR3" id="0ga-qS-ruv"/>
                                                     </connections>
                                                 </textField>
                                             </subviews>
@@ -300,7 +301,7 @@
         <scene sceneID="r28-fo-M1b">
             <objects>
                 <tableViewController title="Available Rooms" id="Y9y-mz-aKG" customClass="AvailableRoomsTableViewController" customModule="RoomFinderPro" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ezC-yU-g3u">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="ezC-yU-g3u">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>

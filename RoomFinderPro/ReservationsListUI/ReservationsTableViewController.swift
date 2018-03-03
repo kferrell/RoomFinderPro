@@ -14,6 +14,7 @@ class ReservationsTableViewController: BaseTableViewController {
     var reservations = [RoomReservation]()
     
     var loadingIndicator: UILabel?
+    let loadingLabelWidth = 215.0
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -111,9 +112,8 @@ class ReservationsTableViewController: BaseTableViewController {
     
     func setupLoadingIndicator() {
         let screenSize = UIScreen.main.bounds
-        let labelWidth = 215.0
-        let labelStartX = (Double(screenSize.width) / 2.0) - (labelWidth / 2.0)
-        loadingIndicator = UILabel(frame: CGRect(x: labelStartX, y: Double(screenSize.height) + 50.0, width: labelWidth, height: 20.0))
+        let labelStartX = (Double(screenSize.width) / 2.0) - (loadingLabelWidth / 2.0)
+        loadingIndicator = UILabel(frame: CGRect(x: labelStartX, y: Double(screenSize.height) + 50.0, width: loadingLabelWidth, height: 20.0))
         loadingIndicator?.font = UIFont.systemFont(ofSize: 12.0, weight: UIFont.Weight.semibold)
         loadingIndicator?.text = "Checking for new reservations..."
         loadingIndicator?.textAlignment = .center
@@ -125,22 +125,23 @@ class ReservationsTableViewController: BaseTableViewController {
     
     override func showActivityIndicator() {
         guard let loadingIndicator = loadingIndicator else { return }
+        
+        let screenSize = UIScreen.main.bounds
+        let labelStartX = (Double(screenSize.width) / 2.0) - (loadingLabelWidth / 2.0)
 
-        loadingIndicator.isHidden = false
         UIView.animate(withDuration: 1.0, animations: {
-            var newFrame = loadingIndicator.frame
-            newFrame.origin.y = newFrame.origin.y - 250.0
-            loadingIndicator.frame = newFrame
+            loadingIndicator.frame = CGRect(x: labelStartX, y: Double(screenSize.height) - 210.0, width: self.loadingLabelWidth, height: 20.0)
         })
     }
 
     override func hideActivityIndicator() {
         guard let loadingIndicator = loadingIndicator else { return }
+        
+        let screenSize = UIScreen.main.bounds
+        let labelStartX = (Double(screenSize.width) / 2.0) - (loadingLabelWidth / 2.0)
 
         UIView.animate(withDuration: 0.3, animations: {
-            var newFrame = loadingIndicator.frame
-            newFrame.origin.y = newFrame.origin.y + 250.0
-            loadingIndicator.frame = newFrame
+            loadingIndicator.frame = CGRect(x: labelStartX, y: Double(screenSize.height) + 400.0, width: self.loadingLabelWidth, height: 20.0)
         }, completion: nil)
     }
 }
