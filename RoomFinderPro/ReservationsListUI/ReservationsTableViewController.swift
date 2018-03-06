@@ -48,7 +48,7 @@ class ReservationsTableViewController: BaseTableViewController {
                 // Sort reservations by date
                 let sortedReservations = results.sorted(by: {
                     guard let reservationDate0 = $0.startDate(), let reservationDate1 = $1.startDate() else { return false }
-                    return reservationDate0.compare(reservationDate1) == .orderedDescending
+                    return reservationDate0.compare(reservationDate1) == .orderedAscending
                 })
                 
                 self?.reservations = sortedReservations

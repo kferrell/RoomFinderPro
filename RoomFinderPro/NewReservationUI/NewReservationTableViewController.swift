@@ -102,10 +102,6 @@ class NewReservationTableViewController: BaseTableViewController, UITextFieldDel
         tableView.endUpdates()
     }
     
-    func setRoomNumber(toValue roomNumber: String) {
-        roomNumberLabel.text = roomNumber
-    }
-    
     @IBAction func cancelForm(_ sender: Any) {
         dismiss(animated: true, completion: nil)
     }
@@ -121,6 +117,7 @@ class NewReservationTableViewController: BaseTableViewController, UITextFieldDel
         reservationsDataStore.saveNewReservation(reservation: reservation, apiResponse: { [weak self] error in
             DispatchQueue.main.async {
                 self?.hideActivityIndicator()
+                
                 if error == nil {
                     self?.dismiss(animated: true, completion: nil)
                 } else {
@@ -198,11 +195,11 @@ extension NewReservationTableViewController : UINavigationControllerDelegate, UI
         
         let imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.modalTransitionStyle = .flipHorizontal
+        imagePickerController.modalTransitionStyle = .coverVertical
         imagePickerController.allowsEditing = true
-        imagePickerController.sourceType = .photoLibrary
+        imagePickerController.sourceType = .camera
         imagePickerController.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        //imagePickerController.cameraCaptureMode = .photo
+        imagePickerController.cameraCaptureMode = .photo
         present(imagePickerController, animated: true, completion: nil)
     }
     

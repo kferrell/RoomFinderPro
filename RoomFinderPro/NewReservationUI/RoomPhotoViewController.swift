@@ -46,7 +46,7 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
             if error != nil {
                 print("Error in text detection: \(String(describing: error?.localizedDescription))")
             } else {
-                // DEBUG: Add text markings to the image on screen
+                // DEBUG: Add text outlines to the image on screen
                 self.markedImage = self.mixImage(topImage: self.drawRectangleForTextDectect(image: self.photoView.image!,
                                                                                           results: request.results as! Array<VNTextObservation>),
                                                                                       bottomImage: image)
@@ -177,7 +177,8 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
     
     @IBAction func bookRoom(_ sender: Any) {
         if let parentController = parentRoomReservationController {
-            parentController.setRoomNumber(toValue: roomLabel.text!)
+            let room = ConferenceRoom(roomId: 1, roomName: roomLabel.text!)
+            parentController.setSelectedRoom(room: room)
         }
         
         navigationController?.popViewController(animated: true)

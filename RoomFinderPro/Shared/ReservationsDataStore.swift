@@ -163,7 +163,7 @@ class ReservationsDataStore {
         
         let fetchRequest = NSFetchRequest<NSManagedObject>(entityName: "CachedRoomReservation")
         
-        // Only show reservations in the future (and those that start 15 mins in the past in case we're running late)
+        // Only show reservations in the future (and those that start 15 mins in the past in case the user is running late)
         let dateFilter = NSPredicate(format: "startDate >= %@", Date().addingTimeInterval((-60 * 15)) as NSDate)
         fetchRequest.predicate = dateFilter
         
