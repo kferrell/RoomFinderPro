@@ -60,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let container = NSPersistentContainer(name: "RoomFinderPro")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // FIXME: Determine how to raise alerts to user regarding cached data
+                // FIXME: Raise alerts to user regarding cached data
                 print(error)
             }
         })
@@ -75,7 +75,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             do {
                 try context.save()
             } catch {
-                // FIXME: Determine how to raise alerts to user regarding cached data
+                // FIXME: Raise alerts to user regarding cached data
                 print(error)
             }
         }

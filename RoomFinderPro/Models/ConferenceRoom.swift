@@ -8,6 +8,7 @@
 
 import Foundation
 
+// Response object container for API
 struct ConferenceRoomResponse : Codable {
     let results: [ConferenceRoom]
 }

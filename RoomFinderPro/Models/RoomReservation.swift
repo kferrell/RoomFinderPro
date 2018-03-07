@@ -8,39 +8,33 @@
 
 import Foundation
 
+// Response object container for API
 struct RoomReservationResponse : Codable {
     let results: [RoomReservation]
+}
+
+// Date object container for API
+struct APIDate : Codable {
+    let __type = "Date"
+    let date : Date
+    
+    enum CodingKeys: String, CodingKey {
+        case __type
+        case date = "iso"
+    }
 }
 
 struct RoomReservation : Codable {
     let objectId: String?
     let title: String
-    let startDateString: String
     let duration: Int
     let roomName: String
-    
-    // String format for encoding/decoding Dates to the API
-    static let dateFormatString = "yyyy-MM-dd'T'HH:mm:ssZ"
-    
-    func startDate() -> Date? {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = RoomReservation.dateFormatString
-        
-        if let startDate = dateFormatter.date(from: startDateString) {
-            return startDate
-        }
-        
-        return nil
-    }
+    let startDate: APIDate
     
     func formattedDateString() -> String {
-        var dateString = ""
-        
-        if let startDate = startDate() {
-            let formatter = DateFormatter()
-            formatter.dateFormat = "MMM d, h:mm a"
-            dateString = formatter.string(from: startDate)
-        }
+        let formatter = DateFormatter()
+        formatter.dateFormat = "MMM d, h:mm a"
+        let dateString = formatter.string(from: startDate.date)
         
         return dateString
     }

@@ -35,7 +35,7 @@ class AvailableRoomsTableViewController: BaseTableViewController {
             
             DispatchQueue.main.async {
                 strongSelf.tableView.reloadData()
-                //strongSelf.hideActivityIndicator()
+                strongSelf.hideActivityIndicator()
             }
         })
     }

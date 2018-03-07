@@ -74,7 +74,7 @@ class RoomFinderProTests: XCTestCase {
         let exp = expectation(description: "Test should return rooms")
         
         let datastore = ReservationsDataStore()
-        let reservation = RoomReservation(objectId: nil, title: "Test Reservation", startDateString: "1234", duration: 30, roomName: "WP 1200A")
+        let reservation = RoomReservation(objectId: nil, title: "Test Reservation With New Date", duration: 30, roomName: "WP 1200A", startDate: APIDate(date: Date()))
         datastore.saveNewReservation(reservation: reservation, apiResponse: { error in
             XCTAssert(error == nil, "Received error: \(String(describing: error))")
             exp.fulfill()
@@ -105,12 +105,10 @@ class RoomFinderProTests: XCTestCase {
     
     func testCoreDataLocalCache() {
         let datastore = ReservationsDataStore()
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = RoomReservation.dateFormatString
         
-        let res_30minsPast = RoomReservation(objectId: "ABC123", title: "Room Reservation 1", startDateString: dateFormatter.string(from: Date().addingTimeInterval((-60 * 30))), duration: 30, roomName: "1200A")
-        let res_10minsPast = RoomReservation(objectId: "ABC123", title: "Room Reservation 1", startDateString: dateFormatter.string(from: Date().addingTimeInterval((-60 * 10))), duration: 30, roomName: "1200A")
-        let res_30minsFuture = RoomReservation(objectId: "ABC456", title: "Room Reservation 2", startDateString: dateFormatter.string(from: Date().addingTimeInterval((60 * 30))), duration: 30, roomName: "1200B")
+        let res_30minsPast = RoomReservation(objectId: "ABC123", title: "Room Reservation 1", duration: 30, roomName: "1200A", startDate: APIDate(date: Date().addingTimeInterval((-60 * 30))))
+        let res_10minsPast = RoomReservation(objectId: "ABC123", title: "Room Reservation 1", duration: 30, roomName: "1200A", startDate: APIDate(date: Date().addingTimeInterval((-60 * 10))))
+        let res_30minsFuture = RoomReservation(objectId: "ABC456", title: "Room Reservation 2", duration: 30, roomName: "1200B", startDate: APIDate(date: Date().addingTimeInterval((60 * 30))))
         let reservations = [res_30minsPast, res_10minsPast, res_30minsFuture]
         
         // Save reservations to local cache

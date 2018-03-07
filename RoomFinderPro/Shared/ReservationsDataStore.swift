@@ -24,7 +24,7 @@ class ReservationsDataStore {
     
     func getAvailableRooms(startDate: Date, duration: Double, apiResponse: @escaping (_ results: [ConferenceRoom]?, _ error: Error?) -> ()) {
         // ###############################################################################
-        // Note: Add start date and duration filtering in actual API implementation here:
+        // Note: Add start date and duration filtering in actual API implementation here
         // ###############################################################################
         
         URLSession.shared.dataTask(with: ParseAPI.getAvailableRooms.request()) { (data, response, error) in
@@ -53,6 +53,8 @@ class ReservationsDataStore {
         request.setValue("Application/json", forHTTPHeaderField: "Content-Type")
         
         let encoder = JSONEncoder()
+        encoder.dateEncodingStrategy = .iso8601
+        
         do {
             let reservationJSON = try encoder.encode(reservation)
             request.httpBody = reservationJSON
@@ -84,7 +86,9 @@ class ReservationsDataStore {
             }
             
             do {
-                let resultsObject = try JSONDecoder().decode(RoomReservationResponse.self, from: data)
+                let decoder = JSONDecoder()
+                decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
+                let resultsObject = try decoder.decode(RoomReservationResponse.self, from: data)
                 apiResponse(resultsObject.results, nil)
             } catch let jsonError {
                 apiResponse(nil, jsonError)
@@ -124,7 +128,7 @@ class ReservationsDataStore {
         let managedContext = appDelegate.persistentContainer.viewContext
         
         for item in reservations {
-            guard let objectId = item.objectId, let startDate = item.startDate() else { continue }
+            guard let objectId = item.objectId else { continue }
             
             let entity = NSEntityDescription.entity(forEntityName: "CachedRoomReservation", in: managedContext)!
             let cachedReservation = NSManagedObject(entity: entity, insertInto: managedContext)
@@ -132,7 +136,7 @@ class ReservationsDataStore {
             cachedReservation.setValue(item.title, forKey: "title")
             cachedReservation.setValue(item.roomName, forKey: "roomName")
             cachedReservation.setValue(item.duration, forKey: "duration")
-            cachedReservation.setValue(startDate, forKey: "startDate")
+            cachedReservation.setValue(item.startDate.date, forKey: "startDate")
         }
         
         do {
@@ -173,10 +177,7 @@ class ReservationsDataStore {
             // Convert cached reservations into normal RoomReservation objects (view models)
             for item in cachedReservations {
                 if let objectId = item.value(forKey: "objectId") as? String, let title = item.value(forKey: "title") as? String, let roomName = item.value(forKey: "roomName") as? String, let duration = item.value(forKey: "duration") as? Int, let startDate = item.value(forKey: "startDate") as? Date {
-                    let dateFormatter = DateFormatter()
-                    dateFormatter.dateFormat = RoomReservation.dateFormatString
-                    
-                    let roomReservation = RoomReservation(objectId: objectId, title: title, startDateString: dateFormatter.string(from: startDate), duration: duration, roomName: roomName)
+                    let roomReservation = RoomReservation(objectId: objectId, title: title, duration: duration, roomName: roomName, startDate: APIDate(date: startDate))
                     roomReservations.append(roomReservation)
                 }
             }

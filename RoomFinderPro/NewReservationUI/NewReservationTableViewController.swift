@@ -61,6 +61,12 @@ class NewReservationTableViewController: BaseTableViewController, UITextFieldDel
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Set a default meeting title
+        meetingTitleLabel.text = "Conference Call Reservation"
+        
+        // Set minimum date value to two hours in the past
+        startDatePicker.minimumDate = Date().addingTimeInterval((-120 * 60))
+        
         // Set the start date to the nearest 30 min block
         startDatePicker.date = reservationsInteractor.getNearest30Min(startDate: Date())
         setLabel(startDateLabel, date: startDatePicker.date)
@@ -109,9 +115,7 @@ class NewReservationTableViewController: BaseTableViewController, UITextFieldDel
     @IBAction func saveForm(_ sender: Any) {
         guard let meetingTitle = meetingTitleLabel.text, let selectedRoom = selectedRoom else { return }
 
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = RoomReservation.dateFormatString
-        let reservation = RoomReservation(objectId: nil, title: meetingTitle, startDateString: dateFormatter.string(from: startDatePicker.date), duration: Int(durationStepper.value), roomName: selectedRoom.roomName)
+        let reservation = RoomReservation(objectId: nil, title: meetingTitle, duration: Int(durationStepper.value), roomName: selectedRoom.roomName, startDate: APIDate(date: startDatePicker.date))
         
         showActivityIndicator()
         reservationsDataStore.saveNewReservation(reservation: reservation, apiResponse: { [weak self] error in
