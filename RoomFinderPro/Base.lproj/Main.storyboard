@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13529" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hzb-D2-C7x">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Hzb-D2-C7x">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -394,27 +394,21 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FIa-PK-PNr">
                                         <rect key="frame" x="0.0" y="0.0" width="92" height="43"/>
-                                        <state key="normal" title="Retake Photo">
-                                            <color key="titleColor" red="0.0032096477769999999" green="0.082939543850000005" blue="0.94425781249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
+                                        <state key="normal" title="Retake Photo"/>
                                         <connections>
                                             <action selector="retakePhoto:" destination="CCM-0Z-9Ab" eventType="touchUpInside" id="mkL-qe-eZC"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QTB-la-Gz5">
                                         <rect key="frame" x="143" y="0.0" width="79" height="43"/>
-                                        <state key="normal" title="Book Room">
-                                            <color key="titleColor" red="0.0032096477769999999" green="0.082939543850000005" blue="0.94425781249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
+                                        <state key="normal" title="Book Room"/>
                                         <connections>
                                             <action selector="bookRoom:" destination="CCM-0Z-9Ab" eventType="touchUpInside" id="KGq-tq-Rqk"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Uy9-As-vCJ">
                                         <rect key="frame" x="295" y="0.0" width="48" height="43"/>
-                                        <state key="normal" title="Cancel">
-                                            <color key="titleColor" red="0.0032096477770775429" green="0.082939543849362654" blue="0.94425781249999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
+                                        <state key="normal" title="Cancel"/>
                                         <connections>
                                             <action selector="cancel:" destination="CCM-0Z-9Ab" eventType="touchUpInside" id="6VE-ZS-zcX"/>
                                         </connections>

@@ -202,7 +202,7 @@ extension NewReservationTableViewController : UINavigationControllerDelegate, UI
         imagePickerController.modalTransitionStyle = .coverVertical
         imagePickerController.allowsEditing = true
         imagePickerController.sourceType = .camera
-        imagePickerController.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
+        //imagePickerController.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
         imagePickerController.cameraCaptureMode = .photo
         present(imagePickerController, animated: true, completion: nil)
     }
