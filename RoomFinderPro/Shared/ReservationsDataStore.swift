@@ -89,7 +89,12 @@ class ReservationsDataStore {
                 let decoder = JSONDecoder()
                 decoder.dateDecodingStrategy = .formatted(DateFormatter.iso8601Full)
                 let resultsObject = try decoder.decode(RoomReservationResponse.self, from: data)
-                apiResponse(resultsObject.results, nil)
+                
+                // Only show reservations in the future (and those that start 15 mins in the past in case the user is running late)
+                let filterDate = Date().addingTimeInterval((-60 * 15))
+                let filteredReservations = resultsObject.results.filter({ $0.startDate.date >= filterDate })
+                
+                apiResponse(filteredReservations, nil)
             } catch let jsonError {
                 apiResponse(nil, jsonError)
             }
@@ -169,7 +174,12 @@ class ReservationsDataStore {
         
         // Only show reservations in the future (and those that start 15 mins in the past in case the user is running late)
         let dateFilter = NSPredicate(format: "startDate >= %@", Date().addingTimeInterval((-60 * 15)) as NSDate)
+        
+        // Sort by Date
+        let sort = NSSortDescriptor(key: #keyPath(CachedRoomReservation.startDate), ascending: true)
+        
         fetchRequest.predicate = dateFilter
+        fetchRequest.sortDescriptors = [sort]
         
         do {
             let cachedReservations = try managedContext.fetch(fetchRequest)
