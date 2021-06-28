@@ -10,6 +10,5 @@ The project uses the Vision framework to detect text regions in the image and th
 * Xcode 9.0+
 * iOS 11+
 * Universal iOS Support
-* CocoaPods
 
 

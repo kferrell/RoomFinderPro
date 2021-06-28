@@ -189,33 +189,14 @@ class NewReservationTableViewController: BaseTableViewController, UITextFieldDel
         
         tableView.deselectRow(at: indexPath, animated: true)
     }
-}
-
-extension NewReservationTableViewController : UINavigationControllerDelegate, UIImagePickerControllerDelegate {
     
     @IBAction func takePhoto(_ sender: Any) {
         // Hide the keyboard if displayed
         meetingTitleLabel.resignFirstResponder()
         
-        let imagePickerController = UIImagePickerController()
-        imagePickerController.delegate = self
-        imagePickerController.modalTransitionStyle = .coverVertical
-        imagePickerController.allowsEditing = true
-        imagePickerController.sourceType = .camera
-        //imagePickerController.mediaTypes = UIImagePickerController.availableMediaTypes(for: .photoLibrary)!
-        imagePickerController.cameraCaptureMode = .photo
-        present(imagePickerController, animated: true, completion: nil)
-    }
-    
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        // Get a reference to the image taken by the user
-        let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage
-        self.dismiss(animated: true, completion: nil)
-        
         // Initialize the image analyizer view and pass in the user's photo
         let storyboard: UIStoryboard = UIStoryboard(name: "Main",bundle: nil)
-        let photoViewController = storyboard.instantiateViewController(withIdentifier: "RoomPhotoViewController") as! RoomPhotoViewController
-        photoViewController.selectedPhoto = pickedImage
+        let photoViewController = storyboard.instantiateViewController(withIdentifier: "ARSignViewController") as! ARSignFinderViewController
         photoViewController.parentRoomReservationController = self
         navigationController?.pushViewController(photoViewController, animated: true)
     }

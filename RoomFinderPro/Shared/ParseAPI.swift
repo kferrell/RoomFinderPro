@@ -28,8 +28,8 @@ enum ParseAPI: String {
         var request = URLRequest(url: URL(string: urlString())!)
         
         // Add default request headers
-        request.addValue("", forHTTPHeaderField: "X-Parse-Application-Id")
-        request.addValue("", forHTTPHeaderField: "X-Parse-Master-Key")
+        request.addValue("dVKA56dLYAgu3vp2zPc5U0sMWDhsSSA3ImJxuNGF", forHTTPHeaderField: "X-Parse-Application-Id")
+        request.addValue("hJtWNgzI9f2KXzLLdA5EGLZGO5goIU4vwhGbys3M", forHTTPHeaderField: "X-Parse-Master-Key")
         
         return request
     }

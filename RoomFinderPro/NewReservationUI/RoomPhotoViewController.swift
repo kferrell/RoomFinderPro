@@ -8,10 +8,10 @@
 
 import UIKit
 import Vision
-import SwiftOCR
+import CoreML
 
 class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate, UIImagePickerControllerDelegate {
-    
+    let reservationsInteractor = ReservationsInteractor()
     var parentRoomReservationController: NewReservationTableViewController?
     
     @IBOutlet weak var photoView: UIImageView!
@@ -20,9 +20,15 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
     var selectedPhoto: UIImage?
     var markedImage: UIImage?
     var textImages = [UIImage]()
+    var characterImages = [Int:[UIImage]]()
+    var identifiedWords = [Int:String]()
+    
+    var model: VNCoreMLModel!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        model = try? VNCoreMLModel(for: Alphanum_28x28().model)
         
         if let photo = selectedPhoto {
             processPhoto(photo: photo)
@@ -73,6 +79,7 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
         var transform = CGAffineTransform.identity;
         transform = transform.scaledBy( x: image.size.width, y: -image.size.height);
         transform = transform.translatedBy(x: 0, y: -1 );
+        var wordCnt = 0
         
         let img = renderer.image { ctx in
             for item in results {
@@ -82,7 +89,20 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
                 ctx.cgContext.addRect(item.boundingBox.applying(transform))
                 ctx.cgContext.drawPath(using: .fillStroke)
                 
-                addScreenShotToTextImages(sourceImage: image, boundingBox: item.boundingBox.applying(transform))
+                // Process individual character observations
+                if let characterObservations = item.characterBoxes {
+                    for observation in characterObservations {
+                        ctx.cgContext.setFillColor(UIColor.clear.cgColor)
+                        ctx.cgContext.setStrokeColor(UIColor.red.cgColor)
+                        ctx.cgContext.setLineWidth(1)
+                        ctx.cgContext.addRect(observation.boundingBox.applying(transform))
+                        ctx.cgContext.drawPath(using: .fillStroke)
+                        
+                        addScreenShotToCharImages(sourceImage: image, boundingBox: observation.boundingBox.applying(transform), wordCnt: wordCnt)
+                    }
+                }
+                
+                wordCnt += 1
             }
         }
         return img
@@ -98,13 +118,28 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
         textImages.append(croppedImage)
     }
     
+    func addScreenShotToCharImages(sourceImage image: UIImage, boundingBox: CGRect, wordCnt: Int) {
+        let imageRef = image.cgImage!.cropping(to: boundingBox)
+        let croppedImage = UIImage(cgImage: imageRef!, scale: image.scale, orientation: image.imageOrientation)
+        
+        var characterImageArray = characterImages[wordCnt]
+        
+        if characterImageArray == nil {
+            characterImageArray = [UIImage]()
+        }
+        
+        characterImageArray?.append(croppedImage)
+        characterImages[wordCnt] = characterImageArray
+    }
+    
     func mixImage(topImage: UIImage, bottomImage: UIImage, topImagePoint: CGPoint = CGPoint.zero, isHaveBackground: Bool = true) -> UIImage {
         let newSize = bottomImage.size
         UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
         
-        if(isHaveBackground==true){
+        if isHaveBackground {
             bottomImage.draw(in: CGRect(origin: CGPoint.zero, size: newSize))
         }
+        
         topImage.draw(in: CGRect(origin: topImagePoint, size: newSize))
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
@@ -112,46 +147,81 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
     }
     
     func detectRoomNumber() {
-        var textStrings = [String]()
-        var imageCnt = 0
+        var wordIteration = 0
+        var charIteration = 0
         
-        for item in textImages {
-            let swiftOCRInstance = SwiftOCR()
+        for (wordIdx, word) in characterImages {
+            wordIteration += 1
+            charIteration = 0
             
-            swiftOCRInstance.recognize(item) { recognizedString in
-                print("text: \(recognizedString)")
-                textStrings.append(recognizedString)
-                imageCnt += 1
+            for charImage in word {
+                charIteration += 1
+                let processedImage = reservationsInteractor.preprocessCharacterImage(image: charImage)
                 
-                // Select the room number once all strings are processed
-                if imageCnt == self.textImages.count {
-                    self.selectRoomNumber(fromStrings: textStrings)
+                
+                if wordIteration == characterImages.count && charIteration == word.count {
+                    classifyCharacterImage(image: processedImage, wordNumber: wordIdx, isLastClassificationRequest: true)
+                } else {
+                    classifyCharacterImage(image: processedImage, wordNumber: wordIdx, isLastClassificationRequest: false)
                 }
             }
         }
     }
     
-    func selectRoomNumber(fromStrings textStrings: [String]) {
+    func classifyCharacterImage(image: UIImage, wordNumber: Int, isLastClassificationRequest: Bool) {
+        let request = VNCoreMLRequest(model: model) { [weak self] request, error in
+            guard let results = request.results as? [VNClassificationObservation],
+                let topResult = results.first else {
+                    fatalError("Unexpected result type from VNCoreMLRequest")
+            }
+            
+            let result = topResult.identifier
+            
+            var wordString = self?.identifiedWords[wordNumber] != nil ? self?.identifiedWords[wordNumber] : ""
+            wordString! += result
+            self?.identifiedWords[wordNumber] = wordString!
+            
+            if isLastClassificationRequest {
+                self?.selectRoomNumber()
+            }
+        }
+        
+        guard let ciImage = CIImage(image: image) else {
+            fatalError("Could not convert UIImage to CIImage :(")
+        }
+        
+        let handler = VNImageRequestHandler(ciImage: ciImage)
+        DispatchQueue.global(qos: .userInteractive).async {
+            do {
+                try handler.perform([request])
+            }
+            catch {
+                print(error)
+            }
+        }
+    }
+    
+    func selectRoomNumber() {
         var maxDigitIndex = 0
         var maxDigitAmount = 0.0
         let digits = CharacterSet.decimalDigits
         
-        for (idx, item) in textStrings.enumerated() {
-            if item.count > 0 {
+        for (_, item) in identifiedWords.enumerated() {
+            if item.value.count > 0 {
                 var digitCnt = 0.0
                 
-                for char in item.unicodeScalars {
+                for char in item.value.unicodeScalars {
                     if digits.contains(char) {
                         digitCnt += 1
                     }
                 }
                 
-                let stringDigitPercentage = digitCnt / Double(item.unicodeScalars.count)
+                let stringDigitPercentage = digitCnt / Double(item.value.unicodeScalars.count)
                 
                 print("\(item) - \(stringDigitPercentage)")
                 
                 if stringDigitPercentage > maxDigitAmount {
-                    maxDigitIndex = idx
+                    maxDigitIndex = item.key
                     maxDigitAmount = stringDigitPercentage
                 }
             }
@@ -159,7 +229,7 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
         
         // Set the room number label to the max Digit index
         DispatchQueue.main.async {
-            self.roomLabel.text = textStrings[maxDigitIndex]
+            self.roomLabel.text = self.identifiedWords[maxDigitIndex]
         }
     }
     
