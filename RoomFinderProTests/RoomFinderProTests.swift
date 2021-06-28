@@ -54,55 +54,6 @@ class RoomFinderProTests: XCTestCase {
         XCTAssert(adjustedUpMidDate.compare(expectedUpMidDate) == .orderedSame, "Date did not round properly")
     }
     
-    func testGetAvailableRoomsAPI() {
-        let exp = expectation(description: "Test should return rooms")
-        
-        let datastore = ReservationsDataStore()
-        datastore.getAvailableRooms(startDate: Date(), duration: 1.0, apiResponse: { results, error in
-            XCTAssert(results!.count > 0 , "Did not return results")
-            exp.fulfill()
-        })
-        
-        waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                XCTFail("wait for API failed: \(error)")
-            }
-        }
-    }
-    
-    func testRoomReservationAPI() {
-        let exp = expectation(description: "Test should return rooms")
-        
-        let datastore = ReservationsDataStore()
-        let reservation = RoomReservation(objectId: nil, title: "Test Reservation With New Date", duration: 30, roomName: "WP 1200A", startDate: APIDate(date: Date()))
-        datastore.saveNewReservation(reservation: reservation, apiResponse: { error in
-            XCTAssert(error == nil, "Received error: \(String(describing: error))")
-            exp.fulfill()
-        })
-        
-        waitForExpectations(timeout: 100) { error in
-            if let error = error {
-                XCTFail("wait for API failed: \(error)")
-            }
-        }
-    }
-    
-    func testGetRoomReservationsAPI() {
-        let exp = expectation(description: "Test should return room reservations")
-        
-        let datastore = ReservationsDataStore()
-        datastore.getRoomReservations(apiResponse: { results, error in
-            XCTAssert(results!.count > 0 , "Did not return results")
-            exp.fulfill()
-        })
-        
-        waitForExpectations(timeout: 10) { error in
-            if let error = error {
-                XCTFail("wait for API failed: \(error)")
-            }
-        }
-    }
-    
     func testCoreDataLocalCache() {
         let datastore = ReservationsDataStore()
         
@@ -120,5 +71,54 @@ class RoomFinderProTests: XCTestCase {
         XCTAssert(cachedReservations.count == 2, "Reservations were not cached")
         
     }
+    
+//    func testGetAvailableRoomsAPI() {
+//        let exp = expectation(description: "Test should return rooms")
+//
+//        let datastore = ReservationsDataStore()
+//        datastore.getAvailableRooms(startDate: Date(), duration: 1.0, apiResponse: { results, error in
+//            XCTAssert(results!.count > 0 , "Did not return results")
+//            exp.fulfill()
+//        })
+//
+//        waitForExpectations(timeout: 10) { error in
+//            if let error = error {
+//                XCTFail("wait for API failed: \(error)")
+//            }
+//        }
+//    }
+//
+//    func testRoomReservationAPI() {
+//        let exp = expectation(description: "Test should return rooms")
+//
+//        let datastore = ReservationsDataStore()
+//        let reservation = RoomReservation(objectId: nil, title: "Test Reservation With New Date", duration: 30, roomName: "WP 1200A", startDate: APIDate(date: Date()))
+//        datastore.saveNewReservation(reservation: reservation, apiResponse: { error in
+//            XCTAssert(error == nil, "Received error: \(String(describing: error))")
+//            exp.fulfill()
+//        })
+//
+//        waitForExpectations(timeout: 100) { error in
+//            if let error = error {
+//                XCTFail("wait for API failed: \(error)")
+//            }
+//        }
+//    }
+//
+//    func testGetRoomReservationsAPI() {
+//        let exp = expectation(description: "Test should return room reservations")
+//
+//        let datastore = ReservationsDataStore()
+//        datastore.getRoomReservations(apiResponse: { results, error in
+//            XCTAssert(results!.count > 0 , "Did not return results")
+//            exp.fulfill()
+//        })
+//
+//        waitForExpectations(timeout: 10) { error in
+//            if let error = error {
+//                XCTFail("wait for API failed: \(error)")
+//            }
+//        }
+//    }
     
 }
