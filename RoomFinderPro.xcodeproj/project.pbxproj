@@ -17,6 +17,7 @@
 		228125A81F5B837C00F5A1C2 /* ReservationsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228125A71F5B837C00F5A1C2 /* ReservationsTableViewController.swift */; };
 		228125AC1F5B85CA00F5A1C2 /* ReservationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 228125AB1F5B85CA00F5A1C2 /* ReservationTableViewCell.swift */; };
 		B10682672048F14D00C8CBD6 /* NewReservationTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B10682662048F14D00C8CBD6 /* NewReservationTableViewController.swift */; };
+		B1190801268A6759009B675F /* RoomFinderProUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1190800268A6759009B675F /* RoomFinderProUITests.swift */; };
 		B19A296320498E730065F14D /* ReservationsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A296220498E730065F14D /* ReservationsInteractor.swift */; };
 		B19A29652049E7C80065F14D /* ReservationsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A29642049E7C80065F14D /* ReservationsDataStore.swift */; };
 		B19A29672049E8360065F14D /* ConferenceRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = B19A29662049E8360065F14D /* ConferenceRoom.swift */; };
@@ -33,6 +34,13 @@
 
 /* Begin PBXContainerItemProxy section */
 		228125991F5B833300F5A1C2 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2281257C1F5B833300F5A1C2 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 228125831F5B833300F5A1C2;
+			remoteInfo = RoomFinderPro;
+		};
+		B1190802268A6759009B675F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2281257C1F5B833300F5A1C2 /* Project object */;
 			proxyType = 1;
@@ -56,6 +64,8 @@
 		228125A71F5B837C00F5A1C2 /* ReservationsTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsTableViewController.swift; sourceTree = "<group>"; };
 		228125AB1F5B85CA00F5A1C2 /* ReservationTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationTableViewCell.swift; sourceTree = "<group>"; };
 		B10682662048F14D00C8CBD6 /* NewReservationTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewReservationTableViewController.swift; sourceTree = "<group>"; };
+		B11907FE268A6759009B675F /* RoomFinderProUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RoomFinderProUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1190800268A6759009B675F /* RoomFinderProUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoomFinderProUITests.swift; sourceTree = "<group>"; };
 		B19A296220498E730065F14D /* ReservationsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsInteractor.swift; sourceTree = "<group>"; };
 		B19A29642049E7C80065F14D /* ReservationsDataStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReservationsDataStore.swift; sourceTree = "<group>"; };
 		B19A29662049E8360065F14D /* ConferenceRoom.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConferenceRoom.swift; sourceTree = "<group>"; };
@@ -86,6 +96,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B11907FB268A6759009B675F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -94,6 +111,7 @@
 			children = (
 				228125861F5B833300F5A1C2 /* RoomFinderPro */,
 				2281259B1F5B833400F5A1C2 /* RoomFinderProTests */,
+				B11907FF268A6759009B675F /* RoomFinderProUITests */,
 				228125851F5B833300F5A1C2 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -103,6 +121,7 @@
 			children = (
 				228125841F5B833300F5A1C2 /* RoomFinderPro.app */,
 				228125981F5B833300F5A1C2 /* RoomFinderProTests.xctest */,
+				B11907FE268A6759009B675F /* RoomFinderProUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -131,6 +150,14 @@
 				2281259E1F5B833400F5A1C2 /* Info.plist */,
 			);
 			path = RoomFinderProTests;
+			sourceTree = "<group>";
+		};
+		B11907FF268A6759009B675F /* RoomFinderProUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B1190800268A6759009B675F /* RoomFinderProUITests.swift */,
+			);
+			path = RoomFinderProUITests;
 			sourceTree = "<group>";
 		};
 		B19A295E2049015A0065F14D /* Models */ = {
@@ -216,13 +243,31 @@
 			productReference = 228125981F5B833300F5A1C2 /* RoomFinderProTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
+		B11907FD268A6759009B675F /* RoomFinderProUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1190804268A6759009B675F /* Build configuration list for PBXNativeTarget "RoomFinderProUITests" */;
+			buildPhases = (
+				B11907FA268A6759009B675F /* Sources */,
+				B11907FB268A6759009B675F /* Frameworks */,
+				B11907FC268A6759009B675F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1190803268A6759009B675F /* PBXTargetDependency */,
+			);
+			name = RoomFinderProUITests;
+			productName = RoomFinderProUITests;
+			productReference = B11907FE268A6759009B675F /* RoomFinderProUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		2281257C1F5B833300F5A1C2 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0900;
+				LastSwiftUpdateCheck = 1300;
 				LastUpgradeCheck = 0920;
 				ORGANIZATIONNAME = "Capital One";
 				TargetAttributes = {
@@ -231,6 +276,11 @@
 					};
 					228125971F5B833300F5A1C2 = {
 						CreatedOnToolsVersion = 9.0;
+						TestTargetID = 228125831F5B833300F5A1C2;
+					};
+					B11907FD268A6759009B675F = {
+						CreatedOnToolsVersion = 13.0;
+						ProvisioningStyle = Automatic;
 						TestTargetID = 228125831F5B833300F5A1C2;
 					};
 				};
@@ -250,6 +300,7 @@
 			targets = (
 				228125831F5B833300F5A1C2 /* RoomFinderPro */,
 				228125971F5B833300F5A1C2 /* RoomFinderProTests */,
+				B11907FD268A6759009B675F /* RoomFinderProUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -266,6 +317,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		228125961F5B833300F5A1C2 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B11907FC268A6759009B675F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -308,6 +366,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		B11907FA268A6759009B675F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1190801268A6759009B675F /* RoomFinderProUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
@@ -315,6 +381,11 @@
 			isa = PBXTargetDependency;
 			target = 228125831F5B833300F5A1C2 /* RoomFinderPro */;
 			targetProxy = 228125991F5B833300F5A1C2 /* PBXContainerItemProxy */;
+		};
+		B1190803268A6759009B675F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 228125831F5B833300F5A1C2 /* RoomFinderPro */;
+			targetProxy = B1190802268A6759009B675F /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -507,6 +578,55 @@
 			};
 			name = Release;
 		};
+		B1190805268A6759009B675F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7R59WP4HLQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sample-code.kevin-ferrell.RoomFinderProUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RoomFinderPro;
+			};
+			name = Debug;
+		};
+		B1190806268A6759009B675F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 7R59WP4HLQ;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MARKETING_VERSION = 1.0;
+				MTL_FAST_MATH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = "com.sample-code.kevin-ferrell.RoomFinderProUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RoomFinderPro;
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -533,6 +653,15 @@
 			buildConfigurations = (
 				228125A51F5B833400F5A1C2 /* Debug */,
 				228125A61F5B833400F5A1C2 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1190804268A6759009B675F /* Build configuration list for PBXNativeTarget "RoomFinderProUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1190805268A6759009B675F /* Debug */,
+				B1190806268A6759009B675F /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
