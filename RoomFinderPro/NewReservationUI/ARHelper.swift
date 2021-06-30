@@ -88,7 +88,7 @@ class ARHelper {
         agendaNode.eulerAngles.x = -.pi / 2
         
         let textXOrigin = Float(-(anchor.referenceImage.physicalSize.width / 2) + (anchor.referenceImage.physicalSize.width * 0.08))
-        var textYOrigin = Float((agendaGeometry.height / 2) - (agendaGeometry.height * 0.30))
+        let textYOrigin = Float((agendaGeometry.height / 2) - (agendaGeometry.height * 0.30))
         let fontSize = Float(0.001)
         
         // Header:
@@ -182,7 +182,7 @@ class ARHelper {
         agendaNode.eulerAngles.x = -.pi / 2
         
         let textXOrigin = Float(-(anchor.referenceImage.physicalSize.width / 2) + (anchor.referenceImage.physicalSize.width * 0.08))
-        var textYOrigin = Float((agendaGeometry.height / 2) - (agendaGeometry.height * 0.30))
+        let textYOrigin = Float((agendaGeometry.height / 2) - (agendaGeometry.height * 0.30))
         let fontSize = Float(0.001)
         
         // Header:

@@ -28,7 +28,7 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        model = try? VNCoreMLModel(for: Alphanum_28x28().model)
+        model = try? VNCoreMLModel(for: Alphanum_28x28(configuration: MLModelConfiguration()).model)
         
         if let photo = selectedPhoto {
             processPhoto(photo: photo)

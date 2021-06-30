@@ -134,7 +134,7 @@ class ARSignFinderViewController: UIViewController, ARSCNViewDelegate {
         previousPixelBuffer = pixelBuffer
         
         if let results = registrationRequest.results {
-            if let alignmentObservation = results.first as? VNImageTranslationAlignmentObservation {
+            if let alignmentObservation = results.first {
                 let alignmentTransform = alignmentObservation.alignmentTransform
                 self.recordTransposition(CGPoint(x: alignmentTransform.tx, y: alignmentTransform.ty))
             }
@@ -247,7 +247,6 @@ class ARSignFinderViewController: UIViewController, ARSCNViewDelegate {
             self.searchingForText = false
         })
         
-        let orientation = CGImagePropertyOrientation(rawValue: UInt32(UIDevice.current.orientation.rawValue))!
         let transform = currentFrame.displayTransform(for: UIApplication.shared.statusBarOrientation, viewportSize: self.sceneView.frame.size).inverted()
         let image = CIImage(cvPixelBuffer: currentFrame.capturedImage).transformed(by: transform)
         
@@ -256,7 +255,6 @@ class ARSignFinderViewController: UIViewController, ARSCNViewDelegate {
         let cgImage:CGImage = context.createCGImage(image, from: image.extent)!
         currentlyAnalyzedImage = UIImage.init(cgImage: cgImage)
         
-        //let handler = VNImageRequestHandler(ciImage: image, orientation: orientation, options: [:])
         let handler = VNImageRequestHandler(ciImage: image, options: [:])
         textRequest.reportCharacterBoxes = true
         
@@ -494,7 +492,7 @@ class ARSignFinderViewController: UIViewController, ARSCNViewDelegate {
     
     func classifyCharacterImage(image: UIImage, wordNumber: Int, isLastClassificationRequest: Bool) {
         visionQueue.sync {
-            guard let model = try? VNCoreMLModel(for: Alphanum_28x28().model) else { return }
+            guard let model = try? VNCoreMLModel(for: Alphanum_28x28(configuration: MLModelConfiguration()).model) else { return }
             let request = VNCoreMLRequest(model: model) { [weak self] request, error in
                 guard let results = request.results as? [VNClassificationObservation],
                     let topResult = results.first else {
