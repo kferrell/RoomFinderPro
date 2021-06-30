@@ -247,7 +247,12 @@ class ARSignFinderViewController: UIViewController, ARSCNViewDelegate {
             self.searchingForText = false
         })
         
-        let transform = currentFrame.displayTransform(for: UIApplication.shared.statusBarOrientation, viewportSize: self.sceneView.frame.size).inverted()
+        var orientation = UIInterfaceOrientation.portrait
+        if let interfaceOrientation = UIApplication.shared.windows.first(where: { $0.isKeyWindow })?.windowScene?.interfaceOrientation {
+            orientation = interfaceOrientation
+        }
+        
+        let transform = currentFrame.displayTransform(for: orientation, viewportSize: self.sceneView.frame.size).inverted()
         let image = CIImage(cvPixelBuffer: currentFrame.capturedImage).transformed(by: transform)
         
         // Capture screen shot

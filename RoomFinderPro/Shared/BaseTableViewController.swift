@@ -11,7 +11,7 @@ import UIKit
 
 class BaseTableViewController: UITableViewController {
     
-    var activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
+    var activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.large)
     var activityIndicatorBackground = UIView(frame: CGRect(x: (UIScreen.main.bounds.size.width / 2) - 50, y: (UIScreen.main.bounds.size.height / 2) - 200, width: 100, height: 100))
     
     // MARK: Generic Loading Indicator
