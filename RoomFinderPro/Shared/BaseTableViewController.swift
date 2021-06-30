@@ -11,7 +11,7 @@ import UIKit
 
 class BaseTableViewController: UITableViewController {
     
-    var activityIndicator = UIActivityIndicatorView(activityIndicatorStyle: UIActivityIndicatorViewStyle.whiteLarge)
+    var activityIndicator = UIActivityIndicatorView(style: UIActivityIndicatorView.Style.whiteLarge)
     var activityIndicatorBackground = UIView(frame: CGRect(x: (UIScreen.main.bounds.size.width / 2) - 50, y: (UIScreen.main.bounds.size.height / 2) - 200, width: 100, height: 100))
     
     // MARK: Generic Loading Indicator
@@ -26,16 +26,16 @@ class BaseTableViewController: UITableViewController {
         activityIndicator.translatesAutoresizingMaskIntoConstraints = false
         activityIndicator.hidesWhenStopped = true
         
-        let horizontalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: activityIndicatorBackground, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+        let horizontalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: activityIndicatorBackground, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
         view.addConstraint(horizontalConstraint)
         
-        let verticalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: activityIndicatorBackground, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+        let verticalConstraint = NSLayoutConstraint(item: activityIndicator, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: activityIndicatorBackground, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
         view.addConstraint(verticalConstraint)
         
-        let backgroundHorizontalConstraint = NSLayoutConstraint(item: activityIndicatorBackground, attribute: NSLayoutAttribute.centerX, relatedBy: NSLayoutRelation.equal, toItem: activityIndicatorBackground, attribute: NSLayoutAttribute.centerX, multiplier: 1, constant: 0)
+        let backgroundHorizontalConstraint = NSLayoutConstraint(item: activityIndicatorBackground, attribute: NSLayoutConstraint.Attribute.centerX, relatedBy: NSLayoutConstraint.Relation.equal, toItem: activityIndicatorBackground, attribute: NSLayoutConstraint.Attribute.centerX, multiplier: 1, constant: 0)
         view.addConstraint(backgroundHorizontalConstraint)
         
-        let backgroundVerticalConstraint = NSLayoutConstraint(item: activityIndicatorBackground, attribute: NSLayoutAttribute.centerY, relatedBy: NSLayoutRelation.equal, toItem: activityIndicatorBackground, attribute: NSLayoutAttribute.centerY, multiplier: 1, constant: 0)
+        let backgroundVerticalConstraint = NSLayoutConstraint(item: activityIndicatorBackground, attribute: NSLayoutConstraint.Attribute.centerY, relatedBy: NSLayoutConstraint.Relation.equal, toItem: activityIndicatorBackground, attribute: NSLayoutConstraint.Attribute.centerY, multiplier: 1, constant: 0)
         view.addConstraint(backgroundVerticalConstraint)
         
         activityIndicator.startAnimating()

@@ -260,9 +260,9 @@ class RoomPhotoViewController: UIViewController, UINavigationControllerDelegate,
     
     // MARK: UIImagePickerControllerDelegate
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         self.dismiss(animated: true, completion: nil)
-        if let pickedImage = info[UIImagePickerControllerEditedImage] as? UIImage {
+        if let pickedImage = info[UIImagePickerController.InfoKey.editedImage.rawValue] as? UIImage {
             processPhoto(photo: pickedImage)
         }
     }

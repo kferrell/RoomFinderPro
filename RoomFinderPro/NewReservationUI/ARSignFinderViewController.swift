@@ -21,7 +21,7 @@ class ARSignFinderViewController: UIViewController, ARSCNViewDelegate {
     
     /// The view controller that displays the status and "restart experience" UI.
     lazy var statusViewController: StatusViewController = {
-        return childViewControllers.lazy.compactMap({ $0 as? StatusViewController }).first!
+        return children.lazy.compactMap({ $0 as? StatusViewController }).first!
     }()
     
     /// A serial queue for thread safety when modifying the SceneKit node graph.

@@ -136,7 +136,7 @@ class ReservationsInteractor {
     }
     
     func fixOrientation(image: UIImage) -> UIImage {
-        if image.imageOrientation == UIImageOrientation.up {
+        if image.imageOrientation == UIImage.Orientation.up {
             return image
         }
         UIGraphicsBeginImageContextWithOptions(image.size, false, image.scale)

@@ -120,7 +120,7 @@ class ARHelper {
         let time = SCNText(string: ARHelper.getCurrentTime(), extrusionDepth: 0.01)
         time.font = UIFont(name: ".SFUIDisplay", size: 10.0)
         time.flatness = 0.01
-        time.alignmentMode = kCAAlignmentRight
+        time.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.right)
         time.firstMaterial?.diffuse.contents = UIColor.white
         let timeNode = SCNNode(geometry: time)
         timeNode.position.x = (textXOrigin * -1) - Float((anchor.referenceImage.physicalSize.width * 0.15))
@@ -133,7 +133,7 @@ class ARHelper {
         let events = SCNText(string: "4 Upcoming Events", extrusionDepth: 0.01)
         events.font = UIFont(name: ".SFUIDisplay", size: 7.0)
         events.flatness = 0.01
-        events.alignmentMode = kCAAlignmentRight
+        events.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.right)
         events.firstMaterial?.diffuse.contents = UIColor(white: 1.0, alpha: 0.5)
         let eventsNode = SCNNode(geometry: events)
         eventsNode.position.x = (textXOrigin * -1) - Float((anchor.referenceImage.physicalSize.width * 0.22))
@@ -214,7 +214,7 @@ class ARHelper {
         let time = SCNText(string: ARHelper.getCurrentTime(), extrusionDepth: 0.01)
         time.font = UIFont(name: ".SFUIDisplay", size: 10.0)
         time.flatness = 0.01
-        time.alignmentMode = kCAAlignmentRight
+        time.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.right)
         time.firstMaterial?.diffuse.contents = UIColor.white
         let timeNode = SCNNode(geometry: time)
         timeNode.position.x = (textXOrigin * -1) - Float((anchor.referenceImage.physicalSize.width * 0.15))
@@ -227,7 +227,7 @@ class ARHelper {
         let events = SCNText(string: "2 Upcoming Events", extrusionDepth: 0.01)
         events.font = UIFont(name: ".SFUIDisplay", size: 7.0)
         events.flatness = 0.01
-        events.alignmentMode = kCAAlignmentRight
+        events.alignmentMode = convertFromCATextLayerAlignmentMode(CATextLayerAlignmentMode.right)
         events.firstMaterial?.diffuse.contents = UIColor(white: 1.0, alpha: 0.5)
         let eventsNode = SCNNode(geometry: events)
         eventsNode.position.x = (textXOrigin * -1) - Float((anchor.referenceImage.physicalSize.width * 0.22))
@@ -278,3 +278,8 @@ class ARHelper {
     
 }
 
+
+// Helper function inserted by Swift 4.2 migrator.
+fileprivate func convertFromCATextLayerAlignmentMode(_ input: CATextLayerAlignmentMode) -> String {
+	return input.rawValue
+}
