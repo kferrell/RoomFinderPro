@@ -78,7 +78,6 @@
 		B1A9DE942140974900803DA4 /* ARHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ARHelper.swift; sourceTree = "<group>"; };
 		B1A9DE96214097E000803DA4 /* StatusViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatusViewController.swift; sourceTree = "<group>"; };
 		B1D4343720EBC581002B5BDA /* Alphanum_28x28.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = Alphanum_28x28.mlmodel; sourceTree = "<group>"; };
-		B1F2D1A82142FB7100547435 /* turicreate-ocr.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = "turicreate-ocr.mlmodel"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,7 +177,6 @@
 				B1A9DE922140973300803DA4 /* ARSignFinderViewController.swift */,
 				B1A9DE96214097E000803DA4 /* StatusViewController.swift */,
 				B1A9DE942140974900803DA4 /* ARHelper.swift */,
-				B1F2D1A82142FB7100547435 /* turicreate-ocr.mlmodel */,
 				B1D4343720EBC581002B5BDA /* Alphanum_28x28.mlmodel */,
 			);
 			path = NewReservationUI;

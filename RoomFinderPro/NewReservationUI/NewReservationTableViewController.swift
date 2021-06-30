@@ -57,6 +57,7 @@ class NewReservationTableViewController: BaseTableViewController, UITextFieldDel
     let reservationsInteractor = ReservationsInteractor()
     let reservationsDataStore = ReservationsDataStore()
     var selectedRoom: ConferenceRoom?
+    var parentReservationsView: ReservationsTableViewController?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -121,6 +122,9 @@ class NewReservationTableViewController: BaseTableViewController, UITextFieldDel
         reservationsDataStore.saveNewReservation(reservation: reservation, apiResponse: { [weak self] error in
             DispatchQueue.main.async {
                 self?.hideActivityIndicator()
+                
+                // Make sure the parent view reloads its data
+                self?.parentReservationsView?.loadDataFromAPI()
                 
                 if error == nil {
                     self?.dismiss(animated: true, completion: nil)

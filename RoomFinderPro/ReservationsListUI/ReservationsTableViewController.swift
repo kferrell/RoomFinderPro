@@ -36,6 +36,17 @@ class ReservationsTableViewController: BaseTableViewController {
         loadDataFromAPI()
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard segue.identifier == "NewReservationSegue", let navigationController = segue.destination as? UINavigationController else {
+            print("returning")
+            return
+        }
+        
+        if let newReservationController = navigationController.topViewController as? NewReservationTableViewController {
+            newReservationController.parentReservationsView = self
+        }
+    }
+    
     func loadDataFromLocalCache() {
         reservations = reservationsDataStore.getRoomReservationLocalCache()
         self.tableView.reloadData()
