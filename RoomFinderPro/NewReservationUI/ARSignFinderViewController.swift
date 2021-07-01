@@ -134,7 +134,7 @@ class ARSignFinderViewController: UIViewController, ARSCNViewDelegate {
         previousPixelBuffer = pixelBuffer
         
         if let results = registrationRequest.results {
-            if let alignmentObservation = results.first {
+            if let alignmentObservation = results.first as? VNImageTranslationAlignmentObservation {
                 let alignmentTransform = alignmentObservation.alignmentTransform
                 self.recordTransposition(CGPoint(x: alignmentTransform.tx, y: alignmentTransform.ty))
             }
